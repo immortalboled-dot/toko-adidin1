@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Online A'Didin - Belanja Mudah, Langsung ke WhatsApp</title>
+    <style>/* --- CONFIGURASI UTAMA & RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --success-color: #16a34a;
+    --success-hover: #15803d;
+    --danger-color: #dc2626;
+    --danger-hover: #b91c1c;
+    --warning-color: #ea580c;
+    --bg-light: #f8fafc;
+    --border-color: #e2e8f0;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --whatsapp-color: #25d366;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.text-center { text-align: center; }
+.hidden { display: none !important; }
+
+/* --- HEADER & NAVBAR --- */
+header {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo h1 {
+    color: var(--primary-color);
+    font-size: 24px;
+}
+.logo p {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.nav-link {
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.nav-link.active, .nav-link:hover {
+    background-color: #eff6ff;
+    color: var(--primary-color);
+}
+
+/* --- TOMBOL-TOMBOL --- */
+button {
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+.btn-primary { background: var(--primary-color); color: white; }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-success { background: var(--success-color); color: white; }
+.btn-success:hover { background: var(--success-hover); }
+.btn-danger { background: var(--danger-color); color: white; }
+.btn-danger:hover { background: var(--danger-hover); }
+.btn-secondary { background: var(--text-muted); color: white; }
+.btn-whatsapp { background: var(--whatsapp-color); color: white; }
+.btn-block { width: 100%; display: block; }
+.btn-share { background: #f1f5f9; color: var(--text-dark); border: 1px solid var(--border-color); }
+.btn-share:hover { background: #e2e8f0; }
+
+/* --- LAYOUT HALAMAN --- */
+.page-section {
+    display: none;
+    padding: 30px 0;
+}
+.page-section.active {
+    display: block;
+}
+.section-title {
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 8px;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--primary-color);
+}
+
+/* --- FITUR PENCARIAN & FILTER --- */
+.search-filter-box {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.search-input, .filter-select {
+    display: flex;
+    align-items: center;
+    background: #f1f5f9;
+    padding: 10px 15px;
+    border-radius: 6px;
+    flex: 1;
+}
+.search-input input, .filter-select select {
+    border: none;
+    background: transparent;
+    width: 100%;
+    margin-left: 10px;
+    outline: none;
+    font-size: 15px;
+}
+
+/* --- GRID PRODUK PEMBELI --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+.product-card {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+.product-card.out-of-stock {
+    opacity: 0.6;
+}
+.product-img-box {
+    width: 100%;
+    height: 200px;
+    background: #f1f5f9;
+    position: relative;
+}
+.product-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.badge-out {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: var(--danger-color);
+    color: white; padding: 4px 8px;
+    font-size: 11px; border-radius: 4px;
+    font-weight: bold;
+}
+.product-info {
+    padding: 15px;
+    flex-grow: 1;
+}
+.product-cat {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+.product-title {
+    font-size: 16px;
+    margin: 5px 0;
+    font-weight: 600;
+}
+.product-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+.product-price {
+    font-size: 18px;
+    color: var(--warning-color);
+    font-weight: 700;
+}
+.product-action {
+    padding: 0 15px 15px 15px;
+}
+
+/* --- KERANJANG & CHECKOUT --- */
+.cart-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+@media (min-width: 768px) {
+    .cart-container { grid-template-columns: 1.5fr 1fr; }
+}
+.cart-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+}
+.cart-item img {
+    width: 70px; height: 70px;
+    object-fit: cover; border-radius: 6px;
+    margin-right: 15px;
+}
+.cart-item-details { flex-grow: 1; }
+.cart-qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+.cart-qty-controls button {
+    padding: 2px 8px;
+    background: #e2e8f0;
+}
+.checkout-wrapper {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+.order-summary {
+    margin-bottom: 25px;
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 6px;
+}
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.summary-line.total {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--success-color);
+    margin-top: 8px;
+}
+
+/* --- FORM STYLE GENERAL --- */
+.form-style h3 { margin-bottom: 15px; }
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+.form-style input[type="text"],
+.form-style input[type="number"],
+.form-style input[type="password"],
+.form-style input[type="tel"],
+.form-style select,
+.form-style textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+}
+.form-style textarea { height: 80px; resize: vertical; }
+#img-preview-container img {
+    max-width: 100px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+/* --- PANEL AUTH (ADMIN) --- */
+.auth-box {
+    max-width: 400px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color);
+}
+.auth-box h2 { text-align: center; margin-bottom: 20px; }
+.auth-switch {
+    text-align: center; margin-top: 15px;
+    font-size: 13px; color: var(--text-muted);
+}
+.auth-switch span {
+    color: var(--primary-color); cursor: pointer; font-weight: bold;
+}
+
+/* --- DASHBOARD ADMIN LAYOUT --- */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+}
+.admin-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+}
+@media (min-width: 992px) {
+    .admin-grid { grid-template-columns: 1fr 2fr; }
+}
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+.card h3 {
+    margin-bottom: 15px; font-size: 18px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+/* TABLE ADMIN */
+.table-responsive { overflow-x: auto; }
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+.admin-table th, .admin-table td {
+    padding: 10px; text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+.admin-table th { background: #f1f5f9; font-weight: 600; }
+.admin-table td img {
+    width: 40px; height: 40px; object-fit: cover; border-radius: 4px;
+}
+.badge-stock {
+    padding: 2px 6px; font-size: 11px; border-radius: 4px; font-weight: bold;
+}
+.badge-stock.in { background: #dcfce7; color: #16a34a; }
+.badge-stock.out { background: #fee2e2; color: #dc2626; }
+
+.btn-actions-group {
+    display: flex; gap: 5px;
+}
+.btn-actions-group button { padding: 4px 8px; font-size: 12px; }
+
+/* --- FOOTER --- */
+footer {
+    background: white; margin-top: 5px;
+    padding: 20px 0; border-top: 1px solid var(--border-color);
+    color: var(--text-muted); font-size: 14px;
+}</style>
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar container">
+            <div class="logo">
+                <h1>A'Didin</h1>
+                <p>Mengembangkan UMKM Lokal</p>
+            </div>
+            <nav>
+                <button id="btn-home" class="nav-link active"><i class="fas fa-store"></i> Toko</button>
+                <button id="btn-cart-view" class="nav-link"><i class="fas fa-shopping-cart"></i> Keranjang <span id="cart-count">0</span></button>
+                <button id="btn-admin-nav" class="nav-link"><i class="fas fa-user-shield"></i> Admin</button>
+                <button id="btn-share" class="btn-share"><i class="fas fa-share-alt"></i> Bagikan Link</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- DASHBOARD PEMBELI -->
+        <section id="buyer-dashboard" class="page-section active">
+            <div id="shop-upgrade-banner" class="card hidden" style="background: #eff6ff; border: 1px solid #bfdbfe; margin-top: 20px;">
+    <h4 style="color: #1e40af;"><i class="fas fa-bullhorn"></i> Pengumuman Upgrade Toko:</h4>
+    <p id="shop-upgrade-message" style="font-size: 14px; color: #1e3a8a; margin-top: 5px; font-weight: 500;"></p>
+</div>
+            <div class="search-filter-box">
+                <div class="search-input">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-buyer" placeholder="Cari nama barang...">
+                </div>
+                <div class="filter-select">
+                    <i class="fas fa-filter"></i>
+                    <select id="category-filter">
+                        <option value="all">Semua Kategori</option>
+                    </select>
+                </div>
+            </div>
+
+            <h2 class="section-title">Produk Unggulan Kami</h2>
+            <div id="product-list" class="product-grid"></div>
+        </section>
+
+        <!-- DASHBOARD KERANJANG BELANJA -->
+        <section id="cart-dashboard" class="page-section">
+            <h2 class="section-title">Keranjang Belanja</h2>
+            <div class="cart-container">
+                <div class="cart-items-wrapper">
+                    <div id="cart-items-list"></div>
+                </div>
+
+                <div class="checkout-wrapper">
+                    <div class="order-summary">
+                        <h3>Ringkasan Belanja</h3>
+                        <div class="summary-line"><span>Subtotal Barang:</span> <span id="summary-subtotal">Rp 0</span></div>
+                        <div class="summary-line"><span>Ongkos Kirim:</span> <span id="summary-shipping">Rp 0</span></div>
+                        <hr>
+                        <div class="summary-line total"><span>Total Bayar:</span> <span id="summary-total">Rp 0</span></div>
+                    </div>
+
+                    <form id="checkout-form" class="form-style">
+                        <h3>Data Pengiriman</h3>
+                        <div class="form-group">
+                            <label for="checkout-name">Nama Lengkap</label>
+                            <input type="text" id="checkout-name" required placeholder="Masukkan nama Anda">
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout-phone">Nomor HP / WhatsApp</label>
+                            <input type="tel" id="checkout-phone" required placeholder="Contoh: 08123456789">
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout-address">Alamat Lengkap</label>
+                            <textarea id="checkout-address" required placeholder="Nama jalan, RT/RW, Kecamatan, Kota"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout-time">Waktu Pengiriman</label>
+                            <select id="checkout-time" required>
+                                <option value="Kirim Sekarang">Kirim Sekarang</option>
+                                <option value="Atur Waktu (Tulis di catatan)">Atur Waktu (Tentukan di catatan)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout-note">Deskripsi / Catatan Tambahan</label>
+                            <textarea id="checkout-note" placeholder="Contoh: Warna merah, kirim jam 4 sore, dll."></textarea>
+                        </div>
+                        <button type="submit" class="btn-block btn-success"><i class="fab fa-whatsapp"></i> Checkout via WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- AREA PANEL ADMIN -->
+        <section id="admin-section" class="page-section">
+            
+            <!-- Login Box -->
+            <div id="admin-login-box" class="auth-box">
+                <h2>Login Admin</h2>
+                <form id="form-login" class="form-style">
+                    <div class="form-group">
+                        <label for="login-username">Username</label>
+                        <input type="text" id="login-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn-block btn-primary">Masuk</button>
+                </form>
+                <p class="auth-switch">Belum punya akun? <span id="switch-to-register">Daftar Admin Baru</span></p>
+            </div>
+
+            <!-- Register Box -->
+            <div id="admin-register-box" class="auth-box hidden">
+                <h2>Daftar Admin Baru</h2>
+                <form id="form-register" class="form-style">
+                    <div class="form-group">
+                        <label for="reg-username">Username Baru</label>
+                        <input type="text" id="reg-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-whatsapp">Nomor WhatsApp Admin</label>
+                        <input type="tel" id="reg-whatsapp" placeholder="Contoh: 62899..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-secret">Sandi Khusus Registrasi</label>
+                        <input type="password" id="reg-secret" placeholder="Masukkan sandi otorisasi" required>
+                    </div>
+                    <button type="submit" class="btn-block btn-success">Daftar Akun</button>
+                </form>
+                <p class="auth-switch">Sudah punya akun? <span id="switch-to-login">Login Kembali</span></p>
+            </div>
+
+            <!-- Logged In Admin Dashboard -->
+            <div id="admin-dashboard" class="hidden">
+                <div class="admin-header">
+                    <h2>Dashboard Admin A'Didin</h2>
+                    <button id="btn-logout" class="btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+
+                <div class="admin-grid">
+                    <div class="admin-sidebar">
+                        <!-- Konfigurasi Ongkir -->
+                        <div class="card">
+                            <h3><i class="fas fa-truck"></i> Konfigurasi Ongkir</h3>
+                            <form id="shipping-config-form" class="form-style">
+                                <div class="form-group">
+                                    <label for="ship-method">Metode Perhitungan</label>
+                                    <select id="ship-method">
+                                        <option value="flat">Tarif Tetap per Pesanan</option>
+                                        <option value="per-pcs">Tarif Dasar + Tambahan per Pcs</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ship-base">Tarif Dasar (Rp)</label>
+                                    <input type="number" id="ship-base" required>
+                                </div>
+                                <div class="form-group" id="additional-pcs-group">
+                                    <label for="ship-add-pcs">Biaya Tambahan per Pcs (Rp)</label>
+                                    <input type="number" id="ship-add-pcs" value="0">
+                                </div>
+                                <button type="submit" class="btn-block btn-primary">Simpan Aturan Ongkir</button>
+                            </form>
+                        </div>
+
+                        <!-- Form Tambah/Edit Produk -->
+                        <div class="card">
+                            <h3 id="form-product-title"><i class="fas fa-plus-circle"></i> Tambah Barang Baru</h3>
+                            <form id="product-form" class="form-style">
+                                <input type="hidden" id="product-id">
+                                <div class="form-group">
+                                    <label for="prod-name">Nama Barang</label>
+                                    <input type="text" id="prod-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prod-price">Harga (Rp)</label>
+                                    <input type="number" id="prod-price" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prod-category">Kategori Barang</label>
+                                    <input type="text" id="prod-category" placeholder="Contoh: Makanan, Pakaian, Kerajinan" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prod-image-file">Upload Foto Produk</label>
+                                    <input type="file" id="prod-image-file" accept="image/*">
+                                    <div id="img-preview-container" class="hidden">
+                                        <img id="img-preview" src="" alt="Pratinjau Foto">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prod-desc">Deskripsi Barang</label>
+                                    <textarea id="prod-desc" required></textarea>
+                                </div>
+                                <button type="submit" id="btn-submit-product" class="btn-block btn-success">Simpan Produk</button>
+                                <button type="button" id="btn-cancel-edit" class="btn-block btn-secondary hidden">Batal Edit</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="admin-main">
+                        <!-- Daftar Stok Barang -->
+                        <div class="card">
+                            <h3><i class="fas fa-boxes"></i> Daftar Stok Barang</h3>
+                            <div class="search-input" style="margin-bottom: 15px;">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="search-admin" placeholder="Cari barang di admin...">
+                            </div>
+                            <div class="table-responsive">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Foto</th>
+                                            <th>Nama</th>
+                                            <th>Kategori</th>
+                                            <th>Harga</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-product-table"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Hubungi Pembeli Langsung -->
+                        <div class="card">
+                            <div class="card">
+    <h3><i class="fas fa-bullhorn"></i> Broadcast Upgrade Toko</h3>
+    <form id="wa-broadcast-form" class="form-style">
+        <div class="form-group">
+            <label for="broadcast-text">Pesan Pembaruan / Upgrade</label>
+            <textarea id="broadcast-text" placeholder="Contoh: Toko di-upgrade! Menambahkan kategori Makanan Ringan baru & menurunkan ongkir!" required></textarea>
+        </div>
+        <button type="submit" class="btn-block btn-primary">Siarkan ke Semua Pengunjung</button>
+        <button type="button" id="btn-clear-broadcast" class="btn-block btn-secondary" style="margin-top: 5px;">Hapus Pengumuman</button>
+    </form>
+</div>
+                            <h3><i class="fab fa-whatsapp"></i> Hubungi Pembeli Langsung</h3>
+                            <form id="wa-customer-form" class="form-style">
+                                <div class="form-group">
+                                    <label for="wa-cust-phone">Nomor WhatsApp Pembeli</label>
+                                    <input type="tel" id="wa-cust-phone" placeholder="Contoh: 62812345..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="wa-cust-template">Pilih Template Pesan</label>
+                                    <select id="wa-cust-template">
+                                        <option value="thanks">Terima Kasih Sudah Bayar</option>
+                                        <option value="process">Pesanan Sedang Diproses</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn-block btn-whatsapp"><i class="fab fa-whatsapp"></i> Kirim Via WhatsApp</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2026 Toko Online A'Didin. Didukung oleh UMKM Lokal.</p>
+        </div>
+    </footer>
+
+    <!-- Script Internal JS modular -->
+    <script type="module">// ================= CONFIGURASI FIREBASE ONLINE REALTIME =================
+const firebaseConfig = {
+  apiKey: "AIzaSyAtEnnjZ73JhkR0lX37Lk2VTN0ikwerkyI",
+  authDomain: "toko-adidin-online.firebaseapp.com",
+  databaseURL: "https://toko-adidin-online-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "toko-adidin-online",
+  storageBucket: "toko-adidin-online.firebasestorage.app",
+  messagingSenderId: "519173191060",
+  appId: "1:519173191060:web:c2ccfb053930c882b237c1",
+  measurementId: "G-W9S020K1S5"
+};
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, set, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// ================= DATA DEFAULT & INITIALIZATION =================
+const DEFAULT_SECRET_REGISTRATION = "476"; 
+const MAIN_WA_NUMBER = "628991286742"; 
+
+let products = [];
+let shippingConfig = { method: "per-pcs", basePrice: 10000, additionalPerPcs: 2000 };
+let adminUsers = [{ username: "admin", password: "123", whatsapp: "628991286742" }];
+let cart = [];
+let currentLoggedInAdmin = null;
+
+// Tambahkan di area atas dekat sinkronisasi Firebase lainnya (misal di bawah onValue(ref(db, 'adminUsers'), ...))
+
+// 1. Sinkronisasi Pesan Upgrade Toko secara Realtime ke layar Pembeli
+onValue(ref(db, 'shopUpgradeNotification'), (snapshot) => {
+    const text = snapshot.val();
+    const banner = document.getElementById('shop-upgrade-banner');
+    const messageContent = document.getElementById('shop-upgrade-message');
+    
+    if(banner && messageContent) {
+        if (text && text.trim() !== "") {
+            messageContent.innerText = text;
+            banner.classList.remove('hidden');
+        } else {
+            banner.classList.add('hidden');
+        }
+    }
+});
+
+// 2. Logika Form Admin untuk Mengirimkan Pesan Upgrade Toko
+setTimeout(() => {
+    const broadcastForm = document.getElementById('wa-broadcast-form');
+    if(broadcastForm) {
+        broadcastForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const msg = document.getElementById('broadcast-text').value;
+            
+            // Simpan ke database firebase secara online
+            set(ref(db, 'shopUpgradeNotification'), msg).then(() => {
+                alert("Pengumuman upgrade toko berhasil disiarkan secara realtime!");
+                this.reset();
+            });
+        });
+    }
+
+    const clearBroadcastBtn = document.getElementById('btn-clear-broadcast');
+    if(clearBroadcastBtn) {
+        clearBroadcastBtn.addEventListener('click', function() {
+            set(ref(db, 'shopUpgradeNotification'), "").then(() => {
+                alert("Pengumuman upgrade toko telah dihapus dari layar pembeli.");
+            });
+        });
+    }
+}, 1000);
+
+// ================= SYNC DATA REALTIME DARI FIREBASE =================
+onValue(ref(db, 'products'), (snapshot) => {
+    const data = snapshot.val();
+    products = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+    renderBuyerProducts();
+    if(currentLoggedInAdmin) renderAdminProductTable();
+});
+
+onValue(ref(db, 'shippingConfig'), (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+        shippingConfig = data;
+    }
+    if(currentLoggedInAdmin) {
+        document.getElementById('ship-method').value = shippingConfig.method;
+        document.getElementById('ship-base').value = shippingConfig.basePrice;
+        document.getElementById('ship-add-pcs').value = shippingConfig.additionalPerPcs;
+        toggleShippingMethodView();
+    }
+});
+
+onValue(ref(db, 'adminUsers'), (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+        adminUsers = Object.values(data);
+    }
+});
+
+// ================= ROUTING NAVIGATION VIA UI =================
+function switchPage(pageName) {
+    const sections = {
+        buyer: document.getElementById('buyer-dashboard'),
+        cart: document.getElementById('cart-dashboard'),
+        admin: document.getElementById('admin-section')
+    };
+    
+    Object.keys(sections).forEach(key => {
+        if(sections[key]) sections[key].classList.remove('active');
+    });
+    document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
+    
+    if(pageName === 'buyer') {
+        if(sections.buyer) sections.buyer.classList.add('active');
+        document.getElementById('btn-home').classList.add('active');
+        renderBuyerProducts();
+    } else if (pageName === 'cart') {
+        if(sections.cart) sections.cart.classList.add('active');
+        document.getElementById('btn-cart-view').classList.add('active');
+        renderCart();
+    } else if (pageName === 'admin') {
+        if(sections.admin) sections.admin.classList.add('active');
+        document.getElementById('btn-admin-nav').classList.add('active');
+        checkAdminSession();
+    }
+}
+
+document.getElementById('btn-home').addEventListener('click', () => switchPage('buyer'));
+document.getElementById('btn-cart-view').addEventListener('click', () => switchPage('cart'));
+document.getElementById('btn-admin-nav').addEventListener('click', () => switchPage('admin'));
+
+document.getElementById('btn-share').addEventListener('click', () => {
+    const fixedUrl = "https://immortalboled-dot.github.io/A-didin-custom-UMKM/";
+    if (navigator.share) {
+        navigator.share({
+            title: "Toko Online A'Didin",
+            text: "Belanja Produk UMKM Lokal Mudah Langsung Ke WhatsApp di Toko A'Didin!",
+            url: fixedUrl
+        }).catch(err => console.log(err));
+    } else {
+        navigator.clipboard.writeText(fixedUrl);
+        alert("Link Toko Berhasil disalin ke clipboard!");
+    }
+});
+
+// ================= MODULE PEMBELI (BUYER DASHBOARD) =================
+function renderBuyerProducts() {
+    const listContainer = document.getElementById('product-list');
+    const searchVal = document.getElementById('search-buyer').value.toLowerCase();
+    const filterCat = document.getElementById('category-filter').value;
+    
+    if(!listContainer) return;
+    listContainer.innerHTML = '';
+    
+    const categories = ['all', ...new Set(products.map(p => p.category))];
+    const catSelect = document.getElementById('category-filter');
+    const currentSelected = catSelect.value;
+    catSelect.innerHTML = '';
+    categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.innerText = cat === 'all' ? 'Semua Kategori' : cat;
+        catSelect.appendChild(opt);
+    });
+    catSelect.value = currentSelected || 'all';
+
+    const filtered = products.filter(p => {
+        const matchSearch = p.name.toLowerCase().includes(searchVal);
+        const matchCat = filterCat === 'all' || p.category === filterCat;
+        return matchSearch && matchCat;
+    });
+
+    if(filtered.length === 0) {
+        listContainer.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted); padding: 40px 0;">Barang tidak ditemukan.</p>`;
+        return;
+    }
+
+    filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = `product-card ${!p.available ? 'out-of-stock' : ''}`;
+        card.innerHTML = `
+            <div class="product-img-box">
+                <img src="${p.img}" alt="${p.name}">
+                ${!p.available ? '<span class="badge-out">Stok Kosong</span>' : ''}
+            </div>
+            <div class="product-info">
+                <span class="product-cat">${p.category}</span>
+                <h3 class="product-title">${p.name}</h3>
+                <p class="product-desc">${p.desc}</p>
+                <div class="product-price">Rp ${p.price.toLocaleString('id-ID')}</div>
+            </div>
+            <div class="product-action">
+                <button class="btn-block btn-primary" onclick="window.addToCart('${p.id}')" ${!p.available ? 'disabled' : ''}>
+                    <i class="fas fa-shopping-cart"></i> ${p.available ? 'Beli / Masuk Keranjang' : 'Stok Habis'}
+                </button>
+            </div>
+        `;
+        listContainer.appendChild(card);
+    });
+}
+
+if(document.getElementById('search-buyer')) document.getElementById('search-buyer').addEventListener('input', renderBuyerProducts);
+if(document.getElementById('category-filter')) document.getElementById('category-filter').addEventListener('change', renderBuyerProducts);
+
+window.addToCart = function(id) {
+    const prod = products.find(p => p.id == id);
+    if (!prod || !prod.available) return;
+
+    const cartItem = cart.find(item => item.product.id == id);
+    if(cartItem) {
+        cartItem.qty++;
+    } else {
+        cart.push({ product: prod, qty: 1 });
+    }
+    updateCartBadge();
+    alert(`${prod.name} dimasukkan ke keranjang.`);
+};
+
+function updateCartBadge() {
+    const totalPcs = cart.reduce((acc, item) => acc + item.qty, 0);
+    document.getElementById('cart-count').innerText = totalPcs;
+}
+
+// ================= MODULE KERANJANG & CHECKOUT =================
+function renderCart() {
+    const listElement = document.getElementById('cart-items-list');
+    if(!listElement) return;
+    listElement.innerHTML = '';
+    
+    if(cart.length === 0) {
+        listElement.innerHTML = '<p class="text-center" style="padding:20px; color:var(--text-muted);">Keranjang Anda masih kosong.</p>';
+        calculatePricing(0, 0);
+        return;
+    }
+
+    let subtotal = 0;
+    let totalQty = 0;
+
+    cart.forEach(item => {
+        const itemCost = item.product.price * item.qty;
+        subtotal += itemCost;
+        totalQty += item.qty;
+
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML = `
+            <img src="${item.product.img}" alt="${item.product.name}">
+            <div class="cart-item-details">
+                <h4>${item.product.name}</h4>
+                <p style="color:var(--warning-color); font-weight:bold;">Rp ${item.product.price.toLocaleString('id-ID')}</p>
+                <div class="cart-qty-controls">
+                    <button type="button" onclick="window.changeQty('${item.product.id}', -1)">-</button>
+                    <span>${item.qty}</span>
+                    <button type="button" onclick="window.changeQty('${item.product.id}', 1)">+</button>
+                </div>
+            </div>
+            <div style="font-weight:bold;">Rp ${itemCost.toLocaleString('id-ID')}</div>
+        `;
+        listElement.appendChild(row);
+    });
+
+    let shippingFee = 0;
+    if (shippingConfig.method === 'flat') {
+        shippingFee = shippingConfig.basePrice;
+    } else if (shippingConfig.method === 'per-pcs') {
+        shippingFee = shippingConfig.basePrice + (shippingConfig.additionalPerPcs * (totalQty - 1 < 0 ? 0 : totalQty - 1));
+    }
+
+    calculatePricing(subtotal, shippingFee);
+}
+
+window.changeQty = function(id, delta) {
+    const index = cart.findIndex(item => item.product.id == id);
+    if(index !== -1) {
+        cart[index].qty += delta;
+        if(cart[index].qty <= 0) {
+            cart.splice(index, 1);
+        }
+    }
+    updateCartBadge();
+    renderCart();
+};
+
+function calculatePricing(subtotal, shipping) {
+    document.getElementById('summary-subtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
+    document.getElementById('summary-shipping').innerText = `Rp ${shipping.toLocaleString('id-ID')}`;
+    document.getElementById('summary-total').innerText = `Rp ${(subtotal + shipping).toLocaleString('id-ID')}`;
+}
+
+document.getElementById('checkout-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if(cart.length === 0) {
+        alert("Keranjang belanja kosong!");
+        return;
+    }
+
+    const name = document.getElementById('checkout-name').value;
+    const phone = document.getElementById('checkout-phone').value;
+    const address = document.getElementById('checkout-address').value;
+    const timeOption = document.getElementById('checkout-time').value;
+    const note = document.getElementById('checkout-note').value || "-";
+
+    let itemText = "";
+    let subtotal = 0;
+    let totalQty = 0;
+    
+    cart.forEach((item, index) => {
+        const totalCost = item.product.price * item.qty;
+        subtotal += totalCost;
+        totalQty += item.qty;
+        itemText += `${index + 1}. ${item.product.name} (${item.qty} pcs) = Rp ${totalCost.toLocaleString('id-ID')}\n`;
+    });
+
+    let shippingFee = 0;
+    if (shippingConfig.method === 'flat') {
+        shippingFee = shippingConfig.basePrice;
+    } else if (shippingConfig.method === 'per-pcs') {
+        shippingFee = shippingConfig.basePrice + (shippingConfig.additionalPerPcs * (totalQty - 1));
+    }
+    const totalBayar = subtotal + shippingFee;
+
+    const textMessage = `*PESANAN BARU - TOKO A'DIDIN*\n===========================\n*Daftar Belanjaan:*\n${itemText}---------------------------\n*Subtotal Barang:* Rp ${subtotal.toLocaleString('id-ID')}\n*Ongkos Kirim:* Rp ${shippingFee.toLocaleString('id-ID')}\n*Total Bayar:* Rp ${totalBayar.toLocaleString('id-ID')}\n\n*Data Pengiriman:*\n• Nama Pembeli: ${name}\n• No HP/WA: ${phone}\n• Alamat Lengkap: ${address}\n• Waktu Pengiriman: ${timeOption}\n• Catatan Tambahan: ${note}\n===========================\nTerima kasih telah mendukung UMKM Lokal!`;
+
+    const waUrl = `https://api.whatsapp.com/send?phone=${MAIN_WA_NUMBER}&text=${encodeURIComponent(textMessage)}`;
+    
+    cart = [];
+    updateCartBadge();
+    this.reset();
+    
+    window.open(waUrl, '_blank');
+    switchPage('buyer');
+});
+
+// ================= MODULE AUTH & ADMIN MANAGEMENT =================
+const loginBox = document.getElementById('admin-login-box');
+const registerBox = document.getElementById('admin-register-box');
+const adminDashboard = document.getElementById('admin-dashboard');
+
+document.getElementById('switch-to-register').addEventListener('click', () => {
+    loginBox.classList.add('hidden'); registerBox.classList.remove('hidden');
+});
+document.getElementById('switch-to-login').addEventListener('click', () => {
+    registerBox.classList.add('hidden'); loginBox.classList.remove('hidden');
+});
+
+document.getElementById('form-register').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const user = document.getElementById('reg-username').value.trim();
+    const pass = document.getElementById('reg-password').value;
+    const waNum = document.getElementById('reg-whatsapp').value.trim();
+    const secret = document.getElementById('reg-secret').value;
+
+    if(secret !== DEFAULT_SECRET_REGISTRATION) {
+        alert("Sandi khusus registrasi SALAH!");
+        return;
+    }
+    if(adminUsers.some(a => a.username === user)) {
+        alert("Username sudah digunakan!");
+        return;
+    }
+
+    const newAdmin = { username: user, password: pass, whatsapp: waNum };
+    set(ref(db, 'adminUsers/' + user), newAdmin).then(() => {
+        alert("Akun Admin Berhasil terdaftar secara online! Silakan Login.");
+        registerBox.classList.add('hidden');
+        loginBox.classList.remove('hidden');
+        this.reset();
+    });
+});
+
+document.getElementById('form-login').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const user = document.getElementById('login-username').value.trim();
+    const pass = document.getElementById('login-password').value;
+
+    const found = adminUsers.find(a => a.username === user && a.password === pass);
+    if(found) {
+        currentLoggedInAdmin = found;
+        alert("Selamat Datang Admin!");
+        checkAdminSession();
+    } else {
+        alert("Username atau Password salah!");
+    }
+});
+
+document.getElementById('btn-logout').addEventListener('click', () => {
+    currentLoggedInAdmin = null;
+    checkAdminSession();
+});
+
+function checkAdminSession() {
+    if(currentLoggedInAdmin) {
+        loginBox.classList.add('hidden'); registerBox.classList.add('hidden');
+        adminDashboard.classList.remove('hidden');
+        renderAdminProductTable();
+    } else {
+        adminDashboard.classList.add('hidden'); loginBox.classList.remove('hidden');
+    }
+}
+
+document.getElementById('shipping-config-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const config = {
+        method: document.getElementById('ship-method').value,
+        basePrice: parseInt(document.getElementById('ship-base').value) || 0,
+        additionalPerPcs: parseInt(document.getElementById('ship-add-pcs').value) || 0
+    };
+    set(ref(db, 'shippingConfig'), config).then(() => {
+        alert("Aturan konfigurasi sistem ongkos kirim tersimpan online!");
+    });
+});
+
+function toggleShippingMethodView() {
+    const method = document.getElementById('ship-method').value;
+    document.getElementById('additional-pcs-group').classList.toggle('hidden', method === 'flat');
+}
+document.getElementById('ship-method').addEventListener('change', toggleShippingMethodView);
+
+let encodedBase64ImageStr = "";
+document.getElementById('prod-image-file').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if(file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            encodedBase64ImageStr = event.target.result;
+            document.getElementById('img-preview').src = encodedBase64ImageStr;
+            document.getElementById('img-preview-container').classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+document.getElementById('product-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const pId = document.getElementById('product-id').value;
+    const name = document.getElementById('prod-name').value;
+    const price = parseInt(document.getElementById('prod-price').value);
+    const category = document.getElementById('prod-category').value;
+    const desc = document.getElementById('prod-desc').value;
+
+    let finalImg = encodedBase64ImageStr || "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400";
+
+    if(pId) {
+        const updatedData = { name, price, category, desc };
+        if(encodedBase64ImageStr) updatedData.img = finalImg;
+        update(ref(db, 'products/' + pId), updatedData).then(() => {
+            alert("Data Produk berhasil diperbarui online!");
+            resetProductForm();
+        });
+    } else {
+        const newId = Date.now().toString();
+        const newProd = { name, price, category, desc, img: finalImg, available: true };
+        set(ref(db, 'products/' + newId), newProd).then(() => {
+            alert("Produk Baru Berhasil ditambahkan secara online!");
+            resetProductForm();
+        });
+    }
+});
+
+function resetProductForm() {
+    document.getElementById('product-form').reset();
+    document.getElementById('product-id').value = "";
+    document.getElementById('img-preview-container').classList.add('hidden');
+    encodedBase64ImageStr = "";
+    document.getElementById('form-product-title').innerHTML = `<i class="fas fa-plus-circle"></i> Tambah Barang Baru`;
+    document.getElementById('btn-submit-product').innerText = "Simpan Produk";
+    document.getElementById('btn-cancel-edit').classList.add('hidden');
+}
+document.getElementById('btn-cancel-edit').addEventListener('click', resetProductForm);
+
+function renderAdminProductTable() {
+    const tbody = document.getElementById('admin-product-table');
+    const searchVal = document.getElementById('search-admin').value.toLowerCase();
+    if(!tbody) return;
+    tbody.innerHTML = '';
+
+    const filtered = products.filter(p => p.name.toLowerCase().includes(searchVal));
+
+    if(filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">Barang tidak ditemukan di Admin.</td></tr>`;
+        return;
+    }
+
+    filtered.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><img src="${p.img}" alt="${p.name}"></td>
+            <td><strong>${p.name}</strong></td>
+            <td>${p.category}</td>
+            <td>Rp ${p.price.toLocaleString('id-ID')}</td>
+            <td><span class="badge-stock ${p.available ? 'in' : 'out'}">${p.available ? 'Tersedia' : 'Kosong'}</span></td>
+            <td>
+                <div class="btn-actions-group">
+                    <button class="btn-secondary" onclick="window.editProduct('${p.id}')"><i class="fas fa-edit"></i></button>
+                    <button class="${p.available ? 'btn-danger' : 'btn-success'}" onclick="window.toggleStock('${p.id}', ${p.available})">
+                        ${p.available ? 'Set Kosong' : 'Set Ada'}
+                    </button>
+                    <button class="btn-danger" style="background:#451a03" onclick="window.deleteProduct('${p.id}')"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+if(document.getElementById('search-admin')) document.getElementById('search-admin').addEventListener('input', renderAdminProductTable);
+
+window.editProduct = function(id) {
+    const p = products.find(prod => prod.id == id);
+    if(!p) return;
+
+    document.getElementById('product-id').value = p.id;
+    document.getElementById('prod-name').value = p.name;
+    document.getElementById('prod-price').value = p.price;
+    document.getElementById('prod-category').value = p.category;
+    document.getElementById('prod-desc').value = p.desc;
+    
+    document.getElementById('form-product-title').innerHTML = `<i class="fas fa-edit"></i> Edit Barang: ${p.name}`;
+    document.getElementById('btn-submit-product').innerText = "Update Perubahan";
+    document.getElementById('btn-cancel-edit').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+window.toggleStock = function(id, currentStatus) {
+    update(ref(db, 'products/' + id), { available: !currentStatus });
+};
+
+window.deleteProduct = function(id) {
+    if(confirm("Hapus produk ini dari database online?")) {
+        remove(ref(db, 'products/' + id)).then(() => alert("Produk dihapus."));
+    }
+};
+
+document.getElementById('wa-customer-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const custPhone = document.getElementById('wa-cust-phone').value.trim();
+    const templateType = document.getElementById('wa-cust-template').value;
+    
+    let message = templateType === 'thanks' 
+        ? "*Toko Online A'Didin*\n\nHalo Kak! Pembayaran telah kami terima dengan baik. Terima kasih banyak atas pembayaran Anda. Pesanan segera siap kami hantarkan! 🙏✨"
+        : "*Toko Online A'Didin*\n\nHalo Kak! Pesanan Anda saat ini sedang kami kemas dan bersiap diproses oleh kurir kami. Mohon ditunggu ya! 📦🚀";
+
+    let cleanPhone = custPhone.startsWith('0') ? '62' + custPhone.slice(1) : custPhone;
+    window.open(`https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(message)}`, '_blank');
+});
+
+// Awal aplikasi dimuat
+switchPage('buyer');</script>
+</body>
+</html>
