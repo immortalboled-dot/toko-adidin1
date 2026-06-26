@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toko Online A'Didin - Modern & Realtime</title>
-    <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- CONFIGURASI UTAMA & RESET --- */
@@ -251,7 +250,25 @@
         .product-cat { font-size: 12px; color: var(--text-muted); text-transform: uppercase; }
         .product-title { font-size: 16px; margin: 5px 0; font-weight: 600; }
         .product-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; }
+        
+        /* Kustom Jumlah Pembelian Kilo & Digital */
+        .weight-selector-box, .digital-selector-box {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .weight-selector-box label, .digital-selector-box label { font-size: 12px; font-weight: bold; color: var(--text-dark); display: block; margin-bottom: 4px;}
+        .weight-presets { display: flex; gap: 4px; margin-bottom: 6px; }
+        .weight-presets button { padding: 4px 6px; font-size: 11px; background: #e2e8f0; color: var(--text-dark); border-radius: 4px;}
+        .weight-presets button.active { background: var(--primary-color); color: white; }
+        .weight-custom-input, .digital-custom-input { display: flex; align-items: center; gap: 5px; }
+        .weight-custom-input input, .digital-custom-input input { width: 100%; padding: 4px 8px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 13px; }
+        .weight-custom-input span, .digital-custom-input span { font-size: 12px; font-weight: bold; }
+
         .product-price { font-size: 18px; color: var(--warning-color); font-weight: 700; }
+        .price-sub-calc { font-size: 12px; color: var(--text-muted); font-style: italic; margin-bottom: 5px; min-height: 18px;}
         .product-action { padding: 0 15px 15px 15px; }
 
         /* --- KERANJANG & CHECKOUT --- */
@@ -340,7 +357,6 @@
             <div class="logo">
                 <h1>A'Didin</h1>
                 <p>Mengembangkan UMKM Lokal</p>
-                <!-- Fitur Jam & Kalender -->
                 <div id="live-datetime" class="datetime-display">Memuat waktu...</div>
             </div>
             <nav>
@@ -348,7 +364,6 @@
                 <button id="btn-cart-view" class="nav-link"><i class="fas fa-shopping-cart"></i> Keranjang <span id="cart-count">0</span></button>
                 <button id="btn-admin-nav" class="nav-link"><i class="fas fa-user-shield"></i> Admin</button>
                 
-                <!-- Fitur Lonceng Notifikasi -->
                 <div class="notification-bell" id="bell-container">
                     <i class="fas fa-bell"></i>
                     <span class="bell-badge hidden" id="bell-badge">0</span>
@@ -363,7 +378,6 @@
 
     <main class="container">
         
-        <!-- DASHBOARD PEMBELI -->
         <section id="buyer-dashboard" class="page-section active">
             <div id="shop-upgrade-banner" class="card hidden banner-upgrade">
                 <h4><i class="fas fa-bullhorn"></i> Pengumuman Toko:</h4>
@@ -383,11 +397,10 @@
                 </div>
             </div>
 
-            <h2 class="section-title">Produk Unggulan Kami</h2>
+            <h2 class="section-title">Produk & Layanan Kami</h2>
             <div id="product-list" class="product-grid"></div>
         </section>
 
-        <!-- DASHBOARD KERANJANG BELANJA -->
         <section id="cart-dashboard" class="page-section">
             <h2 class="section-title">Keranjang Belanja</h2>
             <div class="cart-container">
@@ -415,8 +428,8 @@
                             <input type="tel" id="checkout-phone" required placeholder="Contoh: 08123456789">
                         </div>
                         <div class="form-group">
-                            <label for="checkout-address">Alamat Lengkap</label>
-                            <textarea id="checkout-address" required placeholder="Nama jalan, RT/RW, Kecamatan, Kota"></textarea>
+                            <label for="checkout-address">Alamat Lengkap / No Tujuan Digital</label>
+                            <textarea id="checkout-address" required placeholder="Tulis alamat kirim fisik atau cantumkan No. HP/ID Listrik jika memesan Produk Digital"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="checkout-time">Waktu Pengiriman</label>
@@ -427,7 +440,7 @@
                         </div>
                         <div class="form-group">
                             <label for="checkout-note">Deskripsi / Catatan Tambahan</label>
-                            <textarea id="checkout-note" placeholder="Contoh: Warna merah, Jangan pakai sambal, dll."></textarea>
+                            <textarea id="checkout-note" placeholder="Contoh: Warna merah, Token listrik atas nama..., dll."></textarea>
                         </div>
                         <div class="note-payment-warning">
                             <i class="fas fa-exclamation-triangle"></i> Peringatan: Pembayaran harus lunas saat barang diproses. <strong>TIDAK BOLEH HUTANG!</strong>
@@ -438,10 +451,8 @@
             </div>
         </section>
 
-        <!-- AREA PANEL ADMIN -->
         <section id="admin-section" class="page-section">
             
-            <!-- Login Box -->
             <div id="admin-login-box" class="auth-box">
                 <h2>Login Admin</h2>
                 <form id="form-login" class="form-style">
@@ -458,7 +469,6 @@
                 <p class="auth-switch">Belum punya akun? <span id="switch-to-register">Daftar Admin Baru</span></p>
             </div>
 
-            <!-- Register Box -->
             <div id="admin-register-box" class="auth-box hidden">
                 <h2>Daftar Admin Baru</h2>
                 <form id="form-register" class="form-style">
@@ -483,7 +493,6 @@
                 <p class="auth-switch">Sudah punya akun? <span id="switch-to-login">Login Kembali</span></p>
             </div>
 
-            <!-- Logged In Admin Dashboard -->
             <div id="admin-dashboard" class="hidden">
                 <div class="admin-header">
                     <h2>Dashboard Admin A'Didin</h2>
@@ -493,7 +502,6 @@
                 <div class="admin-grid">
                     <div class="admin-sidebar">
                         
-                        <!-- PENGATURAN TEMA DAN KUSTOMISASI BACKGROUND oleh ADMIN -->
                         <div class="card">
                             <h3><i class="fas fa-cogs"></i> Pengaturan Tampilan Toko</h3>
                             <form id="theme-config-form" class="form-style">
@@ -509,28 +517,37 @@
                             </form>
                         </div>
 
-                        <!-- Form Tambah/Edit Produk -->
                         <div class="card">
                             <h3 id="form-product-title"><i class="fas fa-plus-circle"></i> Tambah Barang Baru</h3>
                             <form id="product-form" class="form-style">
                                 <input type="hidden" id="product-id">
                                 <div class="form-group">
-                                    <label for="prod-name">Nama Barang</label>
-                                    <input type="text" id="prod-name" required>
+                                    <label for="prod-name">Nama Barang / Layanan</label>
+                                    <input type="text" id="prod-name" placeholder="Contoh: Pulsa Telkomsel, Top Up Dana" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="prod-price">Harga (Rp)</label>
-                                    <input type="number" id="prod-price" required>
+                                    <label for="prod-unit-type">Tipe Satuan Harga</label>
+                                    <select id="prod-unit-type" required onchange="handleUnitTypeChange()">
+                                        <option value="pcs">Per Pcs / Satuan Berbiji</option>
+                                        <option value="kg">Per Kilogram (Kg)</option>
+                                        <option value="dus">Per 1 Dus</option>
+                                        <option value="renteng">Per 1 Renteng</option>
+                                        <option value="digital">Digital (Dana, Pulsa, Listrik, dll)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="price-form-group">
+                                    <label for="prod-price">Harga Patokan (Rp)</label>
+                                    <input type="number" id="prod-price" placeholder="Contoh: 20000">
                                 </div>
                                 <div class="form-group">
                                     <label for="prod-category">Kategori Barang</label>
-                                    <input type="text" id="prod-category" placeholder="Contoh: Makanan, Pakaian" required>
+                                    <input type="text" id="prod-category" placeholder="Contoh: Makanan, Sembako, Digital" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="prod-image-file">Upload Foto Produk</label>
                                     <input type="file" id="prod-image-file" accept="image/*">
                                     <div id="img-preview-container" class="hidden">
-                                        <img id="img-preview" src="" alt="Pratinjau Foto">
+                                        <img id="img-preview" src="" alt="Pratinjau Foto" style="max-width:100%; height:120px; object-fit:cover; margin-top:5px;">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -545,7 +562,6 @@
 
                     <div class="admin-main">
                         
-                        <!-- HISTORI PEMBELI OTOMATIS & TARIF MANUAL -->
                         <div class="card">
                             <h3><i class="fas fa-history"></i> Histori Masuk Pesanan Pembeli</h3>
                             <div class="table-responsive">
@@ -565,7 +581,6 @@
                             </div>
                         </div>
 
-                        <!-- Daftar Stok Barang -->
                         <div class="card">
                             <h3><i class="fas fa-boxes"></i> Daftar Stok Barang</h3>
                             <div class="search-input" style="margin-bottom: 15px;">
@@ -578,8 +593,8 @@
                                         <tr>
                                             <th>Foto</th>
                                             <th>Nama</th>
-                                            <th>Kategori</th>
-                                            <th>Harga</th>
+                                            <th>Satuan</th>
+                                            <th>Harga Patokan</th>
                                             <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -589,7 +604,6 @@
                             </div>
                         </div>
 
-                        <!-- Broadcast Upgrade Toko -->
                         <div class="card">
                             <h3><i class="fas fa-bullhorn"></i> Broadcast Upgrade Toko</h3>
                             <form id="wa-broadcast-form" class="form-style">
@@ -601,7 +615,6 @@
                                 <button type="button" id="btn-clear-broadcast" class="btn-block btn-secondary" style="margin-top: 5px;">Hapus Pengumuman Aktif</button>
                             </form>
 
-                            <!-- HISTORI BROADCAST -->
                             <h4 style="margin-top: 20px; border-top: 1px dashed var(--border-color); padding-top: 10px;">Arsip Histori Pengumuman</h4>
                             <div class="table-responsive">
                                 <table class="admin-table">
@@ -629,7 +642,6 @@
         </div>
     </footer>
 
-    <!-- Firebase SDK Non-Module Compatibility Import Script -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     
@@ -646,7 +658,6 @@
             measurementId: "G-W9S020K1S5"
         };
 
-        // Menggunakan Model Compat agar bisa dijalankan lurus offline tanpa server lokal module
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
@@ -658,6 +669,21 @@
         let adminUsers = [];
         let cart = [];
         let currentLoggedInAdmin = null;
+
+        // Otomatis sembunyikan/kosongkan input harga jika memilih jenis digital di admin
+        function handleUnitTypeChange() {
+            const unitType = document.getElementById('prod-unit-type').value;
+            const priceGroup = document.getElementById('price-form-group');
+            const priceInput = document.getElementById('prod-price');
+            if (unitType === 'digital') {
+                priceGroup.classList.add('hidden');
+                priceInput.value = "0";
+                priceInput.removeAttribute('required');
+            } else {
+                priceGroup.classList.remove('hidden');
+                priceInput.setAttribute('required', 'required');
+            }
+        }
 
         // ================= FITUR LIVE JAM & TANGGAL REALTIME =================
         function updateLiveDateTime() {
@@ -683,8 +709,6 @@
         }
 
         // ================= REALTIME DATA SYNC (FIREBASE) =================
-
-        // Sync Notifikasi / Banner Toko + Update Lonceng Pembeli
         db.ref('shopUpgradeNotification').on('value', (snapshot) => {
             const text = snapshot.val();
             const banner = document.getElementById('shop-upgrade-banner');
@@ -712,7 +736,6 @@
             }
         });
 
-        // Sync Produk
         db.ref('products').on('value', (snapshot) => {
             const data = snapshot.val();
             products = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
@@ -720,13 +743,11 @@
             if(currentLoggedInAdmin) renderAdminProductTable();
         });
 
-        // Sync Admin Akun
         db.ref('adminUsers').on('value', (snapshot) => {
             const data = snapshot.val();
             adminUsers = data ? Object.values(data) : [{ username: "admin", password: "123", whatsapp: "628991286742" }];
         });
 
-        // Sync Histori Pembeli & Histori Broadcast ke Admin
         db.ref('orderHistory').on('value', (snapshot) => {
             const data = snapshot.val();
             const historyList = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })).reverse() : [];
@@ -739,13 +760,11 @@
             if(currentLoggedInAdmin) renderAdminBroadcastHistory(broadcastList);
         });
 
-        // Sync Pengaturan Warna / Tema Keren Toko Dari Admin
         db.ref('themeConfig').on('value', (snapshot) => {
             const colors = snapshot.val();
             if(colors) {
                 document.documentElement.style.setProperty('--bg-light', colors.bg);
                 document.documentElement.style.setProperty('--primary-color', colors.primary);
-                
                 if(document.getElementById('theme-bg-color')) document.getElementById('theme-bg-color').value = colors.bg;
                 if(document.getElementById('theme-primary-color')) document.getElementById('theme-primary-color').value = colors.primary;
             }
@@ -817,8 +836,50 @@
             }
 
             filtered.forEach(p => {
+                const isKg = p.unitType === 'kg';
+                const isDigital = p.unitType === 'digital';
+                const isDus = p.unitType === 'dus';
+                const isRenteng = p.unitType === 'renteng';
+                
+                let labelSatuan = '/pcs';
+                if(isKg) labelSatuan = '/kg';
+                else if(isDus) labelSatuan = '/dus';
+                else if(isRenteng) labelSatuan = '/renteng';
+                else if(isDigital) labelSatuan = ' (Nominal Bebas)';
+                
                 const card = document.createElement('div');
                 card.className = `product-card ${!p.available ? 'out-of-stock' : ''}`;
+                
+                let htmlWeightControl = '';
+                let displayPriceHtml = `Rp ${(p.price || 0).toLocaleString('id-ID')}${labelSatuan}`;
+
+                if(isKg && p.available) {
+                    htmlWeightControl = `
+                        <div class="weight-selector-box">
+                            <label>Pilih/Ketik Jumlah Kilo:</label>
+                            <div class="weight-presets">
+                                <button type="button" onclick="setPresetWeight('${p.id}', 0.25, this)">¼ kg</button>
+                                <button type="button" onclick="setPresetWeight('${p.id}', 0.5, this)">½ kg</button>
+                                <button type="button" onclick="setPresetWeight('${p.id}', 1, this)" class="active">1 kg</button>
+                            </div>
+                            <div class="weight-custom-input">
+                                <input type="number" id="input-weight-${p.id}" value="1" min="0.05" step="0.05" oninput="calculateLivePrice('${p.id}', ${p.price})">
+                                <span>Kg</span>
+                            </div>
+                        </div>
+                    `;
+                } else if(isDigital && p.available) {
+                    displayPriceHtml = `<span style="font-size:14px;color:var(--text-muted);">Masukkan Nominal Top Up / Tagihan:</span><br><span id="display-price-${p.id}">Rp 0</span>`;
+                    htmlWeightControl = `
+                        <div class="digital-selector-box">
+                            <label>Ketik Jumlah Nominal Uang (Rp):</label>
+                            <div class="digital-custom-input">
+                                <input type="number" id="input-digital-${p.id}" placeholder="Contoh: 50000" min="1000" oninput="calculateLiveDigitalPrice('${p.id}')">
+                            </div>
+                        </div>
+                    `;
+                }
+
                 card.innerHTML = `
                     <div class="product-img-box">
                         <img src="${p.img}" alt="${p.name}">
@@ -828,10 +889,12 @@
                         <span class="product-cat">${p.category}</span>
                         <h3 class="product-title">${p.name}</h3>
                         <p class="product-desc">${p.desc}</p>
-                        <div class="product-price">Rp ${p.price.toLocaleString('id-ID')}</div>
+                        <div class="product-price" id="main-price-box-${p.id}">${displayPriceHtml}</div>
+                        <div class="price-sub-calc" id="sub-calc-${p.id}"></div>
+                        ${htmlWeightControl}
                     </div>
                     <div class="product-action">
-                        <button class="btn-block btn-primary" onclick="addToCart('${p.id}')" ${!p.available ? 'disabled' : ''}>
+                        <button class="btn-block btn-primary" onclick="handleBuyClick('${p.id}')" ${!p.available ? 'disabled' : ''}>
                             <i class="fas fa-shopping-cart"></i> ${p.available ? 'Beli / Masuk Keranjang' : 'Stok Habis'}
                         </button>
                     </div>
@@ -843,23 +906,88 @@
         if(document.getElementById('search-buyer')) document.getElementById('search-buyer').addEventListener('input', renderBuyerProducts);
         if(document.getElementById('category-filter')) document.getElementById('category-filter').addEventListener('change', renderBuyerProducts);
 
-        window.addToCart = function(id) {
+        window.setPresetWeight = function(prodId, value, buttonEl) {
+            const inputField = document.getElementById(`input-weight-${prodId}`);
+            if(inputField) {
+                inputField.value = value;
+                const parent = buttonEl.parentElement;
+                parent.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                buttonEl.classList.add('active');
+
+                const prod = products.find(p => p.id == prodId);
+                if(prod) calculateLivePrice(prodId, prod.price);
+            }
+        };
+
+        window.calculateLivePrice = function(prodId, pricePerKg) {
+            const inputField = document.getElementById(`input-weight-${prodId}`);
+            const displayPrice = document.getElementById(`main-price-box-${prodId}`);
+            const subCalc = document.getElementById(`sub-calc-${prodId}`);
+            
+            if(!inputField || !displayPrice) return;
+            const currentWeight = parseFloat(inputField.value) || 0;
+            const finalCost = Math.round(pricePerKg * currentWeight);
+            
+            displayPrice.innerHTML = `Rp ${finalCost.toLocaleString('id-ID')}`;
+            subCalc.innerHTML = `Harga untuk ${currentWeight} Kg (Patokan: Rp ${pricePerKg.toLocaleString('id-ID')}/kg)`;
+        };
+
+        window.calculateLiveDigitalPrice = function(prodId) {
+            const inputField = document.getElementById(`input-digital-${prodId}`);
+            const displayPrice = document.getElementById(`display-price-${prodId}`);
+            if(inputField && displayPrice) {
+                const val = parseInt(inputField.value) || 0;
+                displayPrice.innerText = `Rp ${val.toLocaleString('id-ID')}`;
+            }
+        };
+
+        // Mengatur Klik Pembelian
+        window.handleBuyClick = function(id) {
             const prod = products.find(p => p.id == id);
             if (!prod || !prod.available) return;
 
-            const cartItem = cart.find(item => item.product.id == id);
-            if(cartItem) {
-                cartItem.qty++;
-            } else {
-                cart.push({ product: prod, qty: 1 });
+            let buyQty = 1; 
+            let labelBeli = "Pcs";
+            let customPrice = prod.price;
+
+            if(prod.unitType === 'kg') {
+                const inputField = document.getElementById(`input-weight-${id}`);
+                buyQty = parseFloat(inputField.value) || 0;
+                labelBeli = "Kg";
+                if(buyQty <= 0) {
+                    alert("Jumlah kilo pembelian tidak valid!");
+                    return;
+                }
+            } else if (prod.unitType === 'dus') {
+                labelBeli = "Dus";
+            } else if (prod.unitType === 'renteng') {
+                labelBeli = "Renteng";
+            } else if (prod.unitType === 'digital') {
+                const inputField = document.getElementById(`input-digital-${id}`);
+                const nominal = parseInt(inputField.value) || 0;
+                if(nominal <= 0) {
+                    alert("Silakan isi nominal top up / data pembayaran terlebih dahulu!");
+                    return;
+                }
+                customPrice = nominal; 
+                buyQty = 1;
+                labelBeli = "Transaksi";
             }
+
+            const cartItem = cart.find(item => item.product.id == id && item.unitChosen === prod.unitType && item.product.price === customPrice);
+            if(cartItem && prod.unitType !== 'digital') {
+                cartItem.qty += buyQty;
+            } else {
+                const productCopy = { ...prod, price: customPrice };
+                cart.push({ product: productCopy, qty: buyQty, unitChosen: prod.unitType });
+            }
+            
             updateCartBadge();
-            alert(`${prod.name} dimasukkan ke keranjang.`);
+            alert(`${prod.name} sukses dimasukkan ke keranjang.`);
         };
 
         function updateCartBadge() {
-            const totalPcs = cart.reduce((acc, item) => acc + item.qty, 0);
-            document.getElementById('cart-count').innerText = totalPcs;
+            document.getElementById('cart-count').innerText = cart.length;
         }
 
 
@@ -870,16 +998,28 @@
             listElement.innerHTML = '';
             
             if(cart.length === 0) {
-                listElement.innerHTML = '<p class="text-center" style="padding:20px; color:var(--text-muted);">Keranjang Anda masih kosong.</p>';
+                listElement.innerHTML = '<p class="text-center" style="padding:20px; color:var(--text-muted); padding: 40px 0;">Keranjang Anda masih kosong.</p>';
                 document.getElementById('summary-subtotal').innerText = "Rp 0";
                 document.getElementById('summary-total').innerText = "Rp 0";
                 return;
             }
 
             let subtotal = 0;
-            cart.forEach(item => {
-                const itemCost = item.product.price * item.qty;
+            cart.forEach((item, index) => {
+                const isKg = item.unitChosen === 'kg';
+                const isDigital = item.unitChosen === 'digital';
+                const isDus = item.unitChosen === 'dus';
+                const isRenteng = item.unitChosen === 'renteng';
+                const itemCost = Math.round(item.product.price * item.qty);
                 subtotal += itemCost;
+                
+                let displayQty = `${item.qty} Pcs`;
+                if(isKg) displayQty = `${item.qty} Kg`;
+                else if(isDus) displayQty = `${item.qty} Dus`;
+                else if(isRenteng) displayQty = `${item.qty} Renteng`;
+                else if(isDigital) displayQty = "1 Kali";
+
+                const stepChange = isKg ? 0.25 : 1;
 
                 const row = document.createElement('div');
                 row.className = 'cart-item';
@@ -887,26 +1027,26 @@
                     <img src="${item.product.img}" alt="${item.product.name}">
                     <div class="cart-item-details">
                         <h4>${item.product.name}</h4>
-                        <p style="color:var(--warning-color); font-weight:bold;">Rp ${item.product.price.toLocaleString('id-ID')}</p>
+                        <p style="color:var(--text-muted); font-size:12px;">Jenis Satuan: ${item.unitChosen.toUpperCase()}</p>
                         <div class="cart-qty-controls">
-                            <button type="button" onclick="changeQty('${item.product.id}', -1)">-</button>
-                            <span>${item.qty}</span>
-                            <button type="button" onclick="changeQty('${item.product.id}', 1)">+</button>
+                            ${isDigital ? '' : `<button type="button" onclick="changeCartQty(${index}, -${stepChange})">-</button>`}
+                            <span style="font-weight:bold; color:var(--primary-color);">${displayQty}</span>
+                            ${isDigital ? '' : `<button type="button" onclick="changeCartQty(${index}, ${stepChange})">+</button>`}
+                            ${isDigital ? `<button type="button" class="btn-danger" style="padding:2px 6px;font-size:11px;" onclick="changeCartQty(${index}, -1)">Hapus</button>` : ''}
                         </div>
                     </div>
-                    <div style="font-weight:bold;">Rp ${itemCost.toLocaleString('id-ID')}</div>
+                    <div style="font-weight:bold; color:var(--warning-color)">Rp ${itemCost.toLocaleString('id-ID')}</div>
                 `;
                 listElement.appendChild(row);
             });
 
             document.getElementById('summary-subtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
-            document.getElementById('summary-total').innerText = `Rp ${subtotal.toLocaleString('id-ID')} (+ Ongkir Manual)`;
+            document.getElementById('summary-total').innerText = `Rp ${subtotal.toLocaleString('id-ID')} (+ Ongkir Manual jika ada)`;
         }
 
-        window.changeQty = function(id, delta) {
-            const index = cart.findIndex(item => item.product.id == id);
-            if(index !== -1) {
-                cart[index].qty += delta;
+        window.changeCartQty = function(index, delta) {
+            if(cart[index]) {
+                cart[index].qty = parseFloat((cart[index].qty + delta).toFixed(2));
                 if(cart[index].qty <= 0) {
                     cart.splice(index, 1);
                 }
@@ -915,7 +1055,7 @@
             renderCart();
         };
 
-        // CHECKOUT LOGIC & OTOMATIS GENERATE HISTORI KE DATABASE
+        // CHECKOUT LOGIC 
         document.getElementById('checkout-form').addEventListener('submit', function(e) {
             e.preventDefault();
             if(cart.length === 0) {
@@ -933,9 +1073,16 @@
             let subtotal = 0;
             
             cart.forEach((item, index) => {
-                const totalCost = item.product.price * item.qty;
+                const totalCost = Math.round(item.product.price * item.qty);
                 subtotal += totalCost;
-                itemText += `${index + 1}. ${item.product.name} (${item.qty} pcs)\n`;
+                
+                let satuanLabel = 'pcs';
+                if(item.unitChosen === 'kg') satuanLabel = 'Kg';
+                else if(item.unitChosen === 'dus') satuanLabel = 'Dus';
+                else if(item.unitChosen === 'renteng') satuanLabel = 'Renteng';
+                else if(item.unitChosen === 'digital') satuanLabel = 'Transaksi';
+                
+                itemText += `${index + 1}. ${item.product.name} [Harga: Rp ${item.product.price.toLocaleString('id-ID')} x ${item.qty} ${satuanLabel}] -> Rp ${totalCost.toLocaleString('id-ID')}\n`;
             });
 
             const now = new Date();
@@ -953,9 +1100,8 @@
                 shippingFee: 0 
             };
 
-            // Kirim Ke Histori Firebase Realtime
             db.ref('orderHistory').push(orderData).then(() => {
-                const textMessage = `*PESANAN BARU - TOKO A'DIDIN*\n===========================\n*Daftar Belanjaan:*\n${itemText}---------------------------\n*Subtotal Barang:* Rp ${subtotal.toLocaleString('id-ID')}\n*Ongkos Kirim:* (Menunggu Tarif Manual Admin)\n\n*Data Pengiriman:*\n• Nama Pembeli: ${name}\n• No HP/WA: ${phone}\n• Alamat Lengkap: ${address}\n• Waktu: ${timeOption}\n• Catatan: ${note}\n===========================\n*INFO:* Pembayaran Wajib Cash/Lunas Saat Diproses. TIDAK BOLEH HUTANG!`;
+                const textMessage = `*PESANAN BARU - TOKO A'DIDIN*\n===========================\n*Daftar Belanjaan:*\n${itemText}---------------------------\n*Subtotal Barang:* Rp ${subtotal.toLocaleString('id-ID')}\n\n*Data Tujuan / Pengiriman:*\n• Nama Pembeli: ${name}\n• No HP/WA: ${phone}\n• Alamat / No. Tujuan Digital: ${address}\n• Waktu: ${timeOption}\n• Catatan: ${note}\n===========================\n*INFO:* Pembayaran Wajib Cash/Lunas Saat Diproses. TIDAK BOLEH HUTANG!`;
                 const waUrl = `https://api.whatsapp.com/send?phone=${MAIN_WA_NUMBER}&text=${encodeURIComponent(textMessage)}`;
                 
                 cart = [];
@@ -1032,19 +1178,15 @@
 
 
         // ================= LOGIKA DASHBOARD ADMIN & SETTINGAN =================
-
-        // Pengaturan Warna & Tema Toko Kustom Dari Admin
         document.getElementById('theme-config-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const bgVal = document.getElementById('theme-bg-color').value;
             const primaryVal = document.getElementById('theme-primary-color').value;
-            
             db.ref('themeConfig').set({ bg: bgVal, primary: primaryVal }).then(() => {
-                alert("Warna tema dan background berhasil diubah!");
+                alert("Warna tema berhasil diubah!");
             });
         });
 
-        // Pemrosesan Update Pengumuman/Broadcast Baru
         document.getElementById('wa-broadcast-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const msg = document.getElementById('broadcast-text').value;
@@ -1053,18 +1195,17 @@
 
             db.ref('shopUpgradeNotification').set(msg).then(() => {
                 db.ref('broadcastHistory').push({ time: waktuKirim, text: msg });
-                alert("Pengumuman di-upgrade secara realtime & diarsipkan!");
+                alert("Pengumuman disiarkan!");
                 this.reset();
             });
         });
 
         document.getElementById('btn-clear-broadcast').addEventListener('click', function() {
             db.ref('shopUpgradeNotification').set("").then(() => {
-                alert("Pengumuman aktif dihapus dari toko pembeli.");
+                alert("Pengumuman di pembeli dibersihkan.");
             });
         });
 
-        // Render List Arsip Broadcast Lawas
         function renderAdminBroadcastHistory(list) {
             const tbody = document.getElementById('admin-broadcast-history-table');
             if(!tbody) return;
@@ -1080,7 +1221,6 @@
             });
         }
 
-        // Render Histori Pembeli & Logika Hitung Tarif Manual + WhatsApp Costumer Otomatis
         function renderAdminHistoryTable(historyList) {
             const tbody = document.getElementById('admin-history-table');
             if(!tbody) return;
@@ -1099,7 +1239,7 @@
                     <td>
                         <strong>${order.buyerName}</strong><br>
                         WA: ${order.buyerPhone}<br>
-                        Alamat: ${order.buyerAddress}
+                        Alamat/ID: ${order.buyerAddress}
                     </td>
                     <td><pre style="font-size:11px; font-family:inherit;">${order.itemsSummary}Waktu Kirim: ${order.timeOption}\nCatatan: ${order.note}</pre></td>
                     <td>
@@ -1110,6 +1250,7 @@
                         <div class="btn-actions-group">
                             <button class="btn-primary" style="background:#0284c7" onclick="sendStatusWa('${order.id}', 'process')"><i class="fab fa-whatsapp"></i> Proses</button>
                             <button class="btn-success" onclick="sendStatusWa('${order.id}', 'paid')"><i class="fab fa-whatsapp"></i> Lunas & Kirim</button>
+                            <button class="btn-danger" style="background:#ea580c" onclick="sendStatusWa('${order.id}', 'outofstock')"><i class="fab fa-whatsapp"></i> Stok Habis</button>
                             <button class="btn-danger" onclick="deleteOrderHistory('${order.id}')"><i class="fas fa-trash-alt"></i> Hapus</button>
                         </div>
                     </td>
@@ -1139,17 +1280,18 @@
                 let phoneClean = order.buyerPhone.startsWith('0') ? '62' + order.buyerPhone.slice(1) : order.buyerPhone;
 
                 if (statusType === 'process') {
-                    msg = `*UPDATE TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPesanan Anda saat ini sedang dalam *PROSES PENGEMASAN*. \n\n*Rincian:\n• Subtotal: Rp ${order.subtotal.toLocaleString('id-ID')}\n• Ongkir Manual Admin: Rp ${(order.shippingFee || 0).toLocaleString('id-ID')}\n• Total Bayar: Rp ${total.toLocaleString('id-ID')}\n\nMohon ditunggu, kurir bersiap meluncur! 📦🚀`;
+                    msg = `*UPDATE TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPesanan digital/fisik Anda saat ini sedang dalam *PROSES PROSES/PENGIRIMAN*. \n\n*Rincian:\n• Subtotal: Rp ${order.subtotal.toLocaleString('id-ID')}\n• Biaya Admin/Ongkir: Rp ${(order.shippingFee || 0).toLocaleString('id-ID')}\n• Total Bayar: Rp ${total.toLocaleString('id-ID')}\n\nMohon ditunggu ya! 📦🚀`;
                 } else if (statusType === 'paid') {
-                    msg = `*PESANAN SELESAI - TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPembayaran sebesar *Rp ${total.toLocaleString('id-ID')}* telah kami terima dengan baik (*LUNAS*).\n\n⚠️ *Pemberitahuan Sistem:* Toko kami berkomitmen memajukan UMKM Lokal secara sehat, mohon maaf *TIDAK MENERIMA/BOLEH HUTANG*. Terima kasih banyak atas dukungan Anda! 🙏✨`;
+                    msg = `*PESANAN SELESAI - TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPembayaran sebesar *Rp ${total.toLocaleString('id-ID')}* telah kami terima dengan baik (*LUNAS/BERHASIL*).\n\n⚠️ *Pemberitahuan Sistem:* Toko kami berkomitmen memajukan UMKM Lokal secara sehat, mohon maaf *TIDAK MENERIMA/BOLEH HUTANG*. Terima kasih banyak atas dukungan Anda! 🙏✨`;
+                } else if (statusType === 'outofstock') {
+                    msg = `*PEMBERITAHUAN TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\n\nMohon maaf sekali 🙏, produk/layanan yang baru saja Kakak pesan berikut ini:\n\n${order.itemsSummary}\nSaat ini sedang *KOSONG / HABIS STOK* dan luput dari kontrol sistem admin kami.\n\nPesanan Kakak terpaksa kami batalkan sementara waktu. Silakan cek produk kami yang lain atau lakukan konfirmasi ulang jika ada hal yang ingin ditanyakan. Terima kasih banyak atas pengertiannya ya Kak! 😊✨`;
                 }
-
                 window.open(`https://api.whatsapp.com/send?phone=${phoneClean}&text=${encodeURIComponent(msg)}`, '_blank');
             });
         };
 
 
-        // ================= MANAJEMEN PRODUK STOK BARANG =================
+        // ================= AMBIL GAMBAR PRODUK BASE64 =================
         let encodedBase64ImageStr = "";
         if(document.getElementById('prod-image-file')) {
             document.getElementById('prod-image-file').addEventListener('change', function(e) {
@@ -1170,14 +1312,15 @@
             e.preventDefault();
             const pId = document.getElementById('product-id').value;
             const name = document.getElementById('prod-name').value;
-            const price = parseInt(document.getElementById('prod-price').value);
+            const unitType = document.getElementById('prod-unit-type').value;
+            const price = parseInt(document.getElementById('prod-price').value) || 0;
             const category = document.getElementById('prod-category').value;
             const desc = document.getElementById('prod-desc').value;
 
             let finalImg = encodedBase64ImageStr || "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400";
 
             if(pId) {
-                const updatedData = { name, price, category, desc };
+                const updatedData = { name, unitType, price, category, desc };
                 if(encodedBase64ImageStr) updatedData.img = finalImg;
                 db.ref('products/' + pId).update(updatedData).then(() => {
                     alert("Produk berhasil diperbarui!");
@@ -1185,7 +1328,7 @@
                 });
             } else {
                 const newId = Date.now().toString();
-                const newProd = { name, price, category, desc, img: finalImg, available: true };
+                const newProd = { name, unitType, price, category, desc, img: finalImg, available: true };
                 db.ref('products/' + newId).set(newProd).then(() => {
                     alert("Produk Baru Berhasil ditambahkan!");
                     resetProductForm();
@@ -1201,6 +1344,7 @@
             document.getElementById('form-product-title').innerHTML = `<i class="fas fa-plus-circle"></i> Tambah Barang Baru`;
             document.getElementById('btn-submit-product').innerText = "Simpan Produk";
             document.getElementById('btn-cancel-edit').classList.add('hidden');
+            document.getElementById('price-form-group').classList.remove('hidden');
         }
         if(document.getElementById('btn-cancel-edit')) document.getElementById('btn-cancel-edit').addEventListener('click', resetProductForm);
 
@@ -1218,11 +1362,20 @@
 
             filtered.forEach(p => {
                 const tr = document.createElement('tr');
+                
+                let showUnit = 'Pcs / Biji';
+                if(p.unitType === 'kg') showUnit = 'Kg (Kilo)';
+                else if(p.unitType === 'dus') showUnit = 'Dus';
+                else if(p.unitType === 'renteng') showUnit = 'Renteng';
+                else if(p.unitType === 'digital') showUnit = 'Digital (Kustom)';
+
+                const displayPriceText = p.unitType === 'digital' ? 'Diisi Pembeli' : `Rp ${p.price.toLocaleString('id-ID')}`;
+
                 tr.innerHTML = `
                     <td><img src="${p.img}" alt="${p.name}"></td>
                     <td><strong>${p.name}</strong></td>
-                    <td>${p.category}</td>
-                    <td>Rp ${p.price.toLocaleString('id-ID')}</td>
+                    <td><span style="color:var(--primary-color); font-weight:600;">${showUnit}</span></td>
+                    <td>${displayPriceText}</td>
                     <td><span class="badge-stock ${p.available ? 'in' : 'out'}">${p.available ? 'Tersedia' : 'Kosong'}</span></td>
                     <td>
                         <div class="btn-actions-group">
@@ -1245,10 +1398,13 @@
 
             document.getElementById('product-id').value = p.id;
             document.getElementById('prod-name').value = p.name;
+            document.getElementById('prod-unit-type').value = p.unitType || "pcs";
             document.getElementById('prod-price').value = p.price;
             document.getElementById('prod-category').value = p.category;
             document.getElementById('prod-desc').value = p.desc;
             
+            handleUnitTypeChange();
+
             document.getElementById('form-product-title').innerHTML = `<i class="fas fa-edit"></i> Edit Barang: ${p.name}`;
             document.getElementById('btn-submit-product').innerText = "Update Perubahan";
             document.getElementById('btn-cancel-edit').classList.remove('hidden');
@@ -1265,7 +1421,6 @@
             }
         };
 
-        // Mulai muat toko utama pembeli
         switchPage('buyer');
     </script>
 </body>
