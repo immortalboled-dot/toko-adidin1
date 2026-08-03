@@ -37,7 +37,7 @@
         }
 
         .container {
-            width: 92%;
+            width: 94%;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -60,12 +60,12 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
 
         .logo h1 {
             color: var(--primary-color);
-            font-size: 22px;
+            font-size: 20px;
         }
         .logo p {
             font-size: 11px;
@@ -81,7 +81,7 @@
 
         nav {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             align-items: center;
             position: relative;
             flex-wrap: wrap;
@@ -90,10 +90,10 @@
         .nav-link {
             background: transparent;
             border: none;
-            padding: 6px 12px;
+            padding: 6px 10px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-muted);
             border-radius: 6px;
             transition: 0.3s;
@@ -107,10 +107,10 @@
         /* --- LONCENG NOTIFIKASI --- */
         .notification-bell {
             position: relative;
-            font-size: 18px;
+            font-size: 16px;
             color: var(--text-muted);
             cursor: pointer;
-            padding: 5px 8px;
+            padding: 5px 6px;
             transition: 0.3s;
         }
         .notification-bell:hover {
@@ -126,8 +126,8 @@
         }
         .bell-dropdown {
             position: absolute;
-            top: 40px; right: 0;
-            width: 260px; background: white;
+            top: 38px; right: 0;
+            width: 250px; background: white;
             border: 1px solid var(--border-color);
             border-radius: 8px; padding: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -144,11 +144,11 @@
         /* --- TOMBOL-TOMBOL --- */
         button {
             cursor: pointer;
-            padding: 8px 16px;
+            padding: 8px 14px;
             border: none;
             border-radius: 6px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             transition: 0.2s;
         }
         .btn-primary { background: var(--primary-color); color: white; }
@@ -164,23 +164,23 @@
         /* --- LAYOUT HALAMAN --- */
         .page-section {
             display: none;
-            padding: 20px 0;
+            padding: 15px 0;
         }
         .page-section.active {
             display: block;
         }
         .section-title {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             position: relative;
-            padding-bottom: 6px;
-            font-size: 20px;
+            padding-bottom: 5px;
+            font-size: 18px;
         }
         .section-title::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 40px;
+            width: 35px;
             height: 3px;
             background: var(--primary-color);
         }
@@ -188,10 +188,10 @@
         .banner-upgrade {
             background: #eff6ff; 
             border: 1px solid #bfdbfe; 
-            margin-bottom: 20px;
-            padding: 12px;
+            margin-bottom: 15px;
+            padding: 10px;
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         /* --- FITUR PENCARIAN & FILTER --- */
@@ -199,24 +199,24 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             background: white;
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         @media(min-width: 768px) {
             .search-filter-box {
                 flex-direction: row;
-                gap: 15px;
-                padding: 15px;
+                gap: 12px;
+                padding: 12px;
             }
         }
         .search-input, .filter-select {
             display: flex;
             align-items: center;
             background: #f1f5f9;
-            padding: 8px 12px;
+            padding: 8px 10px;
             border-radius: 6px;
             flex: 1;
         }
@@ -226,14 +226,14 @@
             width: 100%;
             margin-left: 8px;
             outline: none;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         /* --- GRID PRODUK PEMBELI --- */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
         }
         .product-card {
             background: white;
@@ -247,76 +247,75 @@
         }
         .product-card.out-of-stock { opacity: 0.6; }
         .product-img-box {
-            width: 100%; height: 160px;
+            width: 100%; height: 140px;
             background: #f1f5f9; position: relative;
         }
         .product-img-box img { width: 100%; height: 100%; object-fit: cover; }
         .badge-out {
             position: absolute;
-            top: 8px; right: 8px;
+            top: 6px; right: 6px;
             background: var(--danger-color);
-            color: white; padding: 3px 6px;
-            font-size: 10px; border-radius: 4px;
+            color: white; padding: 2px 5px;
+            font-size: 9px; border-radius: 4px;
             font-weight: bold;
         }
-        .product-info { padding: 12px; flex-grow: 1; }
-        .product-cat { font-size: 11px; color: var(--text-muted); text-transform: uppercase; }
-        .product-title { font-size: 15px; margin: 4px 0; font-weight: 600; }
-        .product-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+        .product-info { padding: 10px; flex-grow: 1; }
+        .product-cat { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+        .product-title { font-size: 14px; margin: 3px 0; font-weight: 600; }
+        .product-desc { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
         
-        /* Kustom Jumlah Pembelian Kilo & Digital */
         .weight-selector-box, .digital-selector-box {
             background: #f8fafc;
             border: 1px solid var(--border-color);
             padding: 6px;
             border-radius: 6px;
-            margin: 8px 0;
+            margin: 6px 0;
         }
-        .weight-selector-box label, .digital-selector-box label { font-size: 11px; font-weight: bold; color: var(--text-dark); display: block; margin-bottom: 3px;}
-        .weight-presets { display: flex; gap: 4px; margin-bottom: 4px; }
-        .weight-presets button { padding: 3px 5px; font-size: 10px; background: #e2e8f0; color: var(--text-dark); border-radius: 4px;}
+        .weight-selector-box label, .digital-selector-box label { font-size: 10px; font-weight: bold; color: var(--text-dark); display: block; margin-bottom: 2px;}
+        .weight-presets { display: flex; gap: 3px; margin-bottom: 3px; }
+        .weight-presets button { padding: 2px 4px; font-size: 9px; background: #e2e8f0; color: var(--text-dark); border-radius: 4px;}
         .weight-presets button.active { background: var(--primary-color); color: white; }
         .weight-custom-input, .digital-custom-input { display: flex; align-items: center; gap: 4px; }
-        .weight-custom-input input, .digital-custom-input input { width: 100%; padding: 3px 6px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 12px; }
-        .weight-custom-input span, .digital-custom-input span { font-size: 11px; font-weight: bold; }
+        .weight-custom-input input, .digital-custom-input input { width: 100%; padding: 3px 5px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 11px; }
+        .weight-custom-input span, .digital-custom-input span { font-size: 10px; font-weight: bold; }
 
-        .product-price { font-size: 16px; color: var(--warning-color); font-weight: 700; }
-        .price-sub-calc { font-size: 11px; color: var(--text-muted); font-style: italic; margin-bottom: 4px; min-height: 16px;}
-        .product-action { padding: 0 12px 12px 12px; }
+        .product-price { font-size: 15px; color: var(--warning-color); font-weight: 700; }
+        .price-sub-calc { font-size: 10px; color: var(--text-muted); font-style: italic; margin-bottom: 3px; min-height: 14px;}
+        .product-action { padding: 0 10px 10px 10px; }
 
         /* --- KERANJANG & CHECKOUT --- */
-        .cart-container { display: flex; flex-direction: column; gap: 20px; }
+        .cart-container { display: flex; flex-direction: column; gap: 15px; }
         @media (min-width: 768px) { 
-            .cart-container { display: grid; grid-template-columns: 1.4fr 1fr; gap: 25px; } 
+            .cart-container { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; } 
         }
         .cart-item {
-            display: flex; flex-direction: column; gap: 10px; background: white;
-            padding: 12px; border-radius: 8px; margin-bottom: 12px;
+            display: flex; flex-direction: column; gap: 8px; background: white;
+            padding: 10px; border-radius: 8px; margin-bottom: 10px;
             border: 1px solid var(--border-color);
         }
         @media (min-width: 480px) {
             .cart-item { flex-direction: row; align-items: center; }
         }
-        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; }
+        .cart-item img { width: 55px; height: 55px; object-fit: cover; border-radius: 6px; }
         .cart-item-details { flex-grow: 1; }
-        .cart-item-details h4 { font-size: 14px; }
-        .cart-qty-controls { display: flex; align-items: center; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
-        .cart-qty-controls button { padding: 2px 6px; font-size: 11px; background: #e2e8f0; }
+        .cart-item-details h4 { font-size: 13px; }
+        .cart-qty-controls { display: flex; align-items: center; gap: 6px; margin-top: 3px; flex-wrap: wrap; }
+        .cart-qty-controls button { padding: 2px 5px; font-size: 10px; background: #e2e8f0; }
         
-        .checkout-wrapper { background: white; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
-        .order-summary { margin-bottom: 20px; background: #f8fafc; padding: 12px; border-radius: 6px; font-size: 13px; }
-        .summary-line { display: flex; justify-content: space-between; margin-bottom: 6px; }
-        .summary-line.total { font-size: 16px; font-weight: 700; color: var(--success-color); margin-top: 6px; }
+        .checkout-wrapper { background: white; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .order-summary { margin-bottom: 15px; background: #f8fafc; padding: 10px; border-radius: 6px; font-size: 12px; }
+        .summary-line { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .summary-line.total { font-size: 15px; font-weight: 700; color: var(--success-color); margin-top: 5px; }
         .note-payment-warning {
             background: #fff7ed; border: 1px solid #ffedd5;
             padding: 8px; border-radius: 6px; font-size: 11px;
-            color: #c2410c; margin-bottom: 12px;
+            color: #c2410c; margin-bottom: 10px;
         }
 
         /* --- FORM STYLE GENERAL --- */
-        .form-style h3 { margin-bottom: 12px; font-size: 16px; }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 600; }
+        .form-style h3 { margin-bottom: 10px; font-size: 15px; }
+        .form-group { margin-bottom: 10px; }
+        .form-group label { display: block; margin-bottom: 3px; font-size: 12px; font-weight: 600; }
         .form-style input[type="text"],
         .form-style input[type="number"],
         .form-style input[type="password"],
@@ -324,50 +323,74 @@
         .form-style input[type="color"],
         .form-style select,
         .form-style textarea {
-            width: 100%; padding: 8px 10px; border: 1px solid var(--border-color);
-            border-radius: 6px; outline: none; font-size: 13px;
+            width: 100%; padding: 7px 9px; border: 1px solid var(--border-color);
+            border-radius: 6px; outline: none; font-size: 12px;
         }
-        .form-style input[type="color"] { height: 36px; padding: 2px; cursor: pointer; }
-        .form-style textarea { height: 70px; resize: vertical; }
+        .form-style input[type="color"] { height: 34px; padding: 2px; cursor: pointer; }
+        .form-style textarea { height: 65px; resize: vertical; }
 
         /* --- PANEL AUTH (ADMIN) --- */
         .auth-box {
-            max-width: 380px; margin: 30px auto; background: white;
-            padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            max-width: 360px; margin: 25px auto; background: white;
+            padding: 18px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
             border: 1px solid var(--border-color);
         }
-        .auth-box h2 { text-align: center; margin-bottom: 15px; font-size: 20px; }
-        .auth-switch { text-align: center; margin-top: 12px; font-size: 12px; color: var(--text-muted); }
+        .auth-box h2 { text-align: center; margin-bottom: 12px; font-size: 18px; }
+        .auth-switch { text-align: center; margin-top: 10px; font-size: 11px; color: var(--text-muted); }
         .auth-switch span { color: var(--primary-color); cursor: pointer; font-weight: bold; }
 
-        /* --- DASHBOARD ADMIN LAYOUT --- */
+        /* --- DASHBOARD ADMIN LAYOUT (DIPERBAIKI AGAR RESPONSIF) --- */
         .admin-header {
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px;
-            flex-wrap: wrap; gap: 10px;
+            margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;
+            flex-wrap: wrap; gap: 8px;
         }
-        .admin-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .admin-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
         @media (min-width: 992px) { .admin-grid { grid-template-columns: 1fr 1.8fr; } }
-        .card { background: white; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 15px; }
-        .card h3 { margin-bottom: 12px; font-size: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; }
+        .card { background: white; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 12px; }
+        .card h3 { margin-bottom: 10px; font-size: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
 
-        /* TABLE ADMIN */
-        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-        .admin-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 10px; min-width: 500px;}
-        .admin-table th, .admin-table td { padding: 8px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        /* TABEL ADMIN YANG LEBIH RESPONSIF & FLEKSIBEL DI HP */
+        .table-responsive { 
+            width: 100%;
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; 
+            margin-bottom: 5px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+        .admin-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 11px; 
+            min-width: 600px; /* Memastikan tabel tidak tertekan ekstrem dan dapat di-scroll horizontal dengan nyaman */
+        }
+        .admin-table th, .admin-table td { 
+            padding: 8px 10px; 
+            text-align: left; 
+            border-bottom: 1px solid var(--border-color); 
+            white-space: nowrap; /* Mencegah teks terpotong aneh */
+        }
         .admin-table th { background: #f1f5f9; font-weight: 600; }
-        .admin-table td img { width: 35px; height: 35px; object-fit: cover; border-radius: 4px; }
-        .badge-stock { padding: 2px 5px; font-size: 10px; border-radius: 4px; font-weight: bold; }
+        .admin-table td img { width: 30px; height: 30px; object-fit: cover; border-radius: 4px; }
+        
+        /* Membolehkan kolom detail belanja terbungkus rapi */
+        .admin-table td.detail-cell, .admin-table th.detail-header {
+            white-space: normal;
+            min-width: 180px;
+        }
+
+        .badge-stock { padding: 2px 4px; font-size: 9px; border-radius: 4px; font-weight: bold; }
         .badge-stock.in { background: #dcfce7; color: #16a34a; }
         .badge-stock.out { background: #fee2e2; color: #dc2626; }
 
-        .btn-actions-group { display: flex; gap: 4px; flex-wrap: wrap; }
-        .btn-actions-group button { padding: 3px 6px; font-size: 10px; }
+        .btn-actions-group { display: flex; gap: 3px; flex-wrap: wrap; }
+        .btn-actions-group button { padding: 3px 5px; font-size: 10px; }
 
         /* --- FOOTER --- */
         footer {
-            background: white; margin-top: 15px; padding: 15px 0;
-            border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 13px;
+            background: white; margin-top: 15px; padding: 12px 0;
+            border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 12px;
         }
     </style>
 </head>
@@ -435,7 +458,7 @@
                         <h3>Ringkasan Belanja</h3>
                         <div class="summary-line"><span>Subtotal Barang:</span> <span id="summary-subtotal">Rp 0</span></div>
                         <div class="summary-line"><span>Ongkos Kirim:</span> <span id="summary-shipping">Ditentukan Admin</span></div>
-                        <hr style="margin: 6px 0; border: none; border-top: 1px solid var(--border-color);">
+                        <hr style="margin: 5px 0; border: none; border-top: 1px solid var(--border-color);">
                         <div class="summary-line total"><span>Total Bayar:</span> <span id="summary-total">Rp 0</span></div>
                     </div>
 
@@ -569,7 +592,7 @@
                                     <label for="prod-image-file">Upload Foto Produk</label>
                                     <input type="file" id="prod-image-file" accept="image/*">
                                     <div id="img-preview-container" class="hidden">
-                                        <img id="img-preview" src="" alt="Pratinjau Foto" style="max-width:100%; height:120px; object-fit:cover; margin-top:5px;">
+                                        <img id="img-preview" src="" alt="Pratinjau Foto" style="max-width:100%; height:110px; object-fit:cover; margin-top:5px;">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -592,7 +615,7 @@
                                         <tr>
                                             <th>Waktu/Tanggal</th>
                                             <th>Data Pembeli</th>
-                                            <th>Detail Belanja</th>
+                                            <th class="detail-header">Detail Belanja</th>
                                             <th>Ongkir Manual (Rp)</th>
                                             <th>Total</th>
                                             <th>Aksi WhatsApp / Hapus</th>
@@ -605,7 +628,7 @@
 
                         <div class="card">
                             <h3><i class="fas fa-boxes"></i> Daftar Stok Barang</h3>
-                            <div class="search-input" style="margin-bottom: 15px;">
+                            <div class="search-input" style="margin-bottom: 12px;">
                                 <i class="fas fa-search"></i>
                                 <input type="text" id="search-admin" placeholder="Cari barang di admin...">
                             </div>
@@ -637,8 +660,8 @@
                                 <button type="button" id="btn-clear-broadcast" class="btn-block btn-secondary" style="margin-top: 5px;">Hapus Pengumuman Aktif</button>
                             </form>
 
-                            <h4 style="margin-top: 20px; border-top: 1px dashed var(--border-color); padding-top: 10px; font-size: 14px;">Arsip Histori Pengumuman</h4>
-                            <div class="table-responsive">
+                            <h4 style="margin-top: 15px; border-top: 1px dashed var(--border-color); padding-top: 8px; font-size: 13px;">Arsip Histori Pengumuman</h4>
+                            <div class="table-responsive" style="margin-top: 8px;">
                                 <table class="admin-table">
                                     <thead>
                                         <tr>
@@ -690,12 +713,10 @@
         let products = [];
         let adminUsers = [];
         
-        // Membersihkan cache lama di localStorage agar format data keranjang array objek unik terbaca sempurna
         let rawCart = localStorage.getItem('adidin_cart');
         let cart = [];
         try {
             cart = rawCart ? JSON.parse(rawCart) : [];
-            // Jika struktur data lama berupa objek ter-merge/bukan array, reset ke array kosong
             if (!Array.isArray(cart)) cart = [];
         } catch(e) {
             cart = [];
@@ -868,7 +889,7 @@
             });
 
             if(filtered.length === 0) {
-                listContainer.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted); padding: 40px 0;">Barang tidak ditemukan.</p>`;
+                listContainer.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted); padding: 30px 0;">Barang tidak ditemukan.</p>`;
                 return;
             }
 
@@ -906,7 +927,7 @@
                         </div>
                     `;
                 } else if(isDigital && p.available) {
-                    displayPriceHtml = `<span style="font-size:13px;color:var(--text-muted);">Masukkan Nominal Top Up / Tagihan:</span><br><span id="display-price-${p.id}">Rp 0</span>`;
+                    displayPriceHtml = `<span style="font-size:12px;color:var(--text-muted);">Masukkan Nominal Top Up:</span><br><span id="display-price-${p.id}">Rp 0</span>`;
                     htmlWeightControl = `
                         <div class="digital-selector-box">
                             <label>Ketik Jumlah Nominal Uang (Rp):</label>
@@ -1003,7 +1024,6 @@
                 buyQty = 1;
             }
 
-            // Memastikan setiap klik memasukkan objek baru sebagai baris terpisah di keranjang
             cart.push({ 
                 uniqueKey: 'item_' + Date.now() + '_' + Math.random(),
                 product: { ...prod, price: customPrice }, 
@@ -1013,6 +1033,7 @@
             
             saveCartToLocalStorage();
             updateCartBadge();
+            renderCart();
             alert(`${prod.name} sukses dimasukkan ke keranjang.`);
         };
 
@@ -1031,7 +1052,7 @@
             listElement.innerHTML = '';
             
             if(cart.length === 0) {
-                listElement.innerHTML = '<p class="text-center" style="padding:30px; color:var(--text-muted);">Keranjang Anda masih kosong.</p>';
+                listElement.innerHTML = '<p class="text-center" style="padding:25px; color:var(--text-muted);">Keranjang Anda masih kosong.</p>';
                 if(clearCartBtn) clearCartBtn.classList.add('hidden');
                 document.getElementById('summary-subtotal').innerText = "Rp 0";
                 document.getElementById('summary-total').innerText = "Rp 0";
@@ -1066,13 +1087,13 @@
                         <p style="color:var(--text-muted); font-size:11px;">Satuan: ${(item.unitChosen || 'pcs').toUpperCase()}</p>
                         <div class="cart-qty-controls">
                             ${isDigital ? '' : `<button type="button" onclick="changeCartQty(${index}, -${stepChange})">-</button>`}
-                            <span style="font-weight:bold; color:var(--primary-color); font-size:13px;">${displayQty}</span>
+                            <span style="font-weight:bold; color:var(--primary-color); font-size:12px;">${displayQty}</span>
                             ${isDigital ? '' : `<button type="button" onclick="changeCartQty(${index}, ${stepChange})">+</button>`}
                         </div>
                     </div>
                     <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-                        <div style="font-weight:bold; color:var(--warning-color); font-size:14px;">Rp ${itemCost.toLocaleString('id-ID')}</div>
-                        <button type="button" class="btn-danger" style="padding:3px 8px;font-size:11px;" onclick="removeCartItem(${index})"><i class="fas fa-trash"></i> Hapus</button>
+                        <div style="font-weight:bold; color:var(--warning-color); font-size:13px;">Rp ${itemCost.toLocaleString('id-ID')}</div>
+                        <button type="button" class="btn-danger" style="padding:3px 7px;font-size:10px;" onclick="removeCartItem(${index})"><i class="fas fa-trash"></i> Hapus</button>
                     </div>
                 `;
                 listElement.appendChild(row);
@@ -1281,7 +1302,7 @@
             tbody.innerHTML = '';
 
             if(historyList.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:20px;">Belum ada histori transaksi pesanan masuk.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:15px;">Belum ada histori transaksi pesanan masuk.</td></tr>`;
                 return;
             }
 
@@ -1295,16 +1316,16 @@
                         WA: ${order.buyerPhone}<br>
                         Alamat/ID: ${order.buyerAddress}
                     </td>
-                    <td><pre style="font-size:11px; font-family:inherit;">${order.itemsSummary}Waktu Kirim: ${order.timeOption}\nCatatan: ${order.note}</pre></td>
+                    <td class="detail-cell"><pre style="font-size:11px; font-family:inherit; white-space:pre-wrap;">${order.itemsSummary}Waktu Kirim: ${order.timeOption}\nCatatan: ${order.note}</pre></td>
                     <td>
-                        <input type="number" value="${order.shippingFee || 0}" style="width:80px; padding:3px;" onchange="updateManualShipping('${order.id}', this.value)">
+                        <input type="number" value="${order.shippingFee || 0}" style="width:75px; padding:3px; font-size:11px;" onchange="updateManualShipping('${order.id}', this.value)">
                     </td>
                     <td><strong>Rp ${totalTagihan.toLocaleString('id-ID')}</strong></td>
                     <td>
                         <div class="btn-actions-group">
-                            <button class="btn-primary" style="background:#0284c7" onclick="sendStatusWa('${order.id}', 'process')"><i class="fab fa-whatsapp"></i> Proses</button>
-                            <button class="btn-success" onclick="sendStatusWa('${order.id}', 'paid')"><i class="fab fa-whatsapp"></i> Lunas</button>
-                            <button class="btn-danger" style="background:#ea580c" onclick="sendStatusWa('${order.id}', 'outofstock')"><i class="fab fa-whatsapp"></i> Habis</button>
+                            <button class="btn-primary" style="background:#0284c7" onclick="sendStatusWa('${order.id}', 'process')"><i class="fab fa-whatsapp"></i></button>
+                            <button class="btn-success" onclick="sendStatusWa('${order.id}', 'paid')"><i class="fab fa-whatsapp"></i></button>
+                            <button class="btn-danger" style="background:#ea580c" onclick="sendStatusWa('${order.id}', 'outofstock')"><i class="fab fa-whatsapp"></i></button>
                             <button class="btn-danger" onclick="deleteOrderHistory('${order.id}')"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </td>
@@ -1334,9 +1355,9 @@
                 let phoneClean = order.buyerPhone.startsWith('0') ? '62' + order.buyerPhone.slice(1) : order.buyerPhone;
 
                 if (statusType === 'process') {
-                    msg = `*UPDATE TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPesanan digital/fisik Anda saat ini sedang dalam *PROSES PROSES/PENGIRIMAN*. \n\n*Rincian:\n• Subtotal: Rp ${order.subtotal.toLocaleString('id-ID')}\n• Biaya Admin/Ongkir: Rp ${(order.shippingFee || 0).toLocaleString('id-ID')}\n• Total Bayar: Rp ${total.toLocaleString('id-ID')}\n\nMohon ditunggu ya! 📦🚀`;
+                    msg = `*UPDATE TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPesanan digital/fisik Anda saat ini sedang dalam *PROSES / PENGIRIMAN*. \n\n*Rincian:\n• Subtotal: Rp ${order.subtotal.toLocaleString('id-ID')}\n• Biaya Admin/Ongkir: Rp ${(order.shippingFee || 0).toLocaleString('id-ID')}\n• Total Bayar: Rp ${total.toLocaleString('id-ID')}\n\nMohon ditunggu ya! 📦🚀`;
                 } else if (statusType === 'paid') {
-                    msg = `*PESANAN SELESAI - TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPembayaran sebesar *Rp ${total.toLocaleString('id-ID')}* telah kami terima dengan baik (*LUNAS/BERHASIL*).\n\n⚠️ *Pemberitahuan Sistem:* Toko kami berkomitmen memajukan UMKM Lokal secara sehat, mohon maaf *TIDAK MENERIMA/BOLEH HUTANG*. Terima kasih banyak atas dukungan Anda! 🙏✨`;
+                    msg = `*PESANAN SELESAI - TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPembayaran sebesar *Rp ${total.toLocaleString('id-ID')}* telah kami terima dengan baik (*LUNAS/BERHASIL*).\n\n⚠️ *Pemberitahuan Sistem:* Toko kami berkomitmen memajukan UMKM Lokal secara sehat, mohon maaf *TIDAK MENERIMA / TIDAK BOLEH HUTANG*. Terima kasih banyak atas dukungan Anda! 🙏✨`;
                 } else if (statusType === 'outofstock') {
                     msg = `*PEMBERITAHUAN TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\n\nMohon maaf sekali 🙏, produk/layanan yang baru saja Kakak pesan berikut ini:\n\n${order.itemsSummary}\nSaat ini sedang *KOSONG / HABIS STOK* dan luput dari kontrol sistem admin kami.\n\nPesanan Kakak terpaksa kami batalkan sementara waktu. Silakan cek produk kami yang lain atau lakukan konfirmasi ulang jika ada hal yang ingin ditanyakan. Terima kasih banyak atas pengertiannya ya Kak! 😊✨`;
                 }
