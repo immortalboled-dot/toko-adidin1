@@ -37,7 +37,7 @@
         }
 
         .container {
-            width: 90%;
+            width: 92%;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -49,7 +49,7 @@
         header {
             background-color: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            padding: 15px 0;
+            padding: 12px 0;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -60,20 +60,20 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
         }
 
         .logo h1 {
             color: var(--primary-color);
-            font-size: 24px;
+            font-size: 22px;
         }
         .logo p {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
             font-weight: 500;
         }
         .datetime-display {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--warning-color);
             font-weight: bold;
             margin-top: 2px;
@@ -81,17 +81,19 @@
 
         nav {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
             position: relative;
+            flex-wrap: wrap;
         }
 
         .nav-link {
             background: transparent;
             border: none;
-            padding: 8px 16px;
+            padding: 6px 12px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 13px;
             color: var(--text-muted);
             border-radius: 6px;
             transition: 0.3s;
@@ -105,10 +107,10 @@
         /* --- LONCENG NOTIFIKASI --- */
         .notification-bell {
             position: relative;
-            font-size: 20px;
+            font-size: 18px;
             color: var(--text-muted);
             cursor: pointer;
-            padding: 5px 10px;
+            padding: 5px 8px;
             transition: 0.3s;
         }
         .notification-bell:hover {
@@ -116,36 +118,37 @@
         }
         .bell-badge {
             position: absolute;
-            top: 0; right: 2px;
+            top: 0; right: 0;
             background: var(--danger-color);
-            color: white; font-size: 10px;
-            font-weight: bold; padding: 2px 5px;
+            color: white; font-size: 9px;
+            font-weight: bold; padding: 2px 4px;
             border-radius: 50%;
         }
         .bell-dropdown {
             position: absolute;
             top: 40px; right: 0;
-            width: 280px; background: white;
+            width: 260px; background: white;
             border: 1px solid var(--border-color);
-            border-radius: 8px; padding: 12px;
+            border-radius: 8px; padding: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            font-size: 13px; z-index: 200;
+            font-size: 12px; z-index: 200;
             color: var(--text-dark);
         }
         .bell-empty { text-align: center; color: var(--text-muted); padding: 5px 0;}
         .bell-item {
             border-bottom: 1px solid var(--border-color);
-            padding: 8px 0;
+            padding: 6px 0;
         }
         .bell-item:last-child { border: none; }
 
         /* --- TOMBOL-TOMBOL --- */
         button {
             cursor: pointer;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border: none;
             border-radius: 6px;
             font-weight: 600;
+            font-size: 13px;
             transition: 0.2s;
         }
         .btn-primary { background: var(--primary-color); color: white; }
@@ -161,22 +164,23 @@
         /* --- LAYOUT HALAMAN --- */
         .page-section {
             display: none;
-            padding: 30px 0;
+            padding: 20px 0;
         }
         .page-section.active {
             display: block;
         }
         .section-title {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             position: relative;
-            padding-bottom: 8px;
+            padding-bottom: 6px;
+            font-size: 20px;
         }
         .section-title::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 50px;
+            width: 40px;
             height: 3px;
             background: var(--primary-color);
         }
@@ -185,25 +189,34 @@
             background: #eff6ff; 
             border: 1px solid #bfdbfe; 
             margin-bottom: 20px;
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
+            font-size: 13px;
         }
 
         /* --- FITUR PENCARIAN & FILTER --- */
         .search-filter-box {
             display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
             background: white;
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        @media(min-width: 768px) {
+            .search-filter-box {
+                flex-direction: row;
+                gap: 15px;
+                padding: 15px;
+            }
         }
         .search-input, .filter-select {
             display: flex;
             align-items: center;
             background: #f1f5f9;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border-radius: 6px;
             flex: 1;
         }
@@ -211,16 +224,16 @@
             border: none;
             background: transparent;
             width: 100%;
-            margin-left: 10px;
+            margin-left: 8px;
             outline: none;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         /* --- GRID PRODUK PEMBELI --- */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
         }
         .product-card {
             background: white;
@@ -234,69 +247,76 @@
         }
         .product-card.out-of-stock { opacity: 0.6; }
         .product-img-box {
-            width: 100%; height: 200px;
+            width: 100%; height: 160px;
             background: #f1f5f9; position: relative;
         }
         .product-img-box img { width: 100%; height: 100%; object-fit: cover; }
         .badge-out {
             position: absolute;
-            top: 10px; right: 10px;
+            top: 8px; right: 8px;
             background: var(--danger-color);
-            color: white; padding: 4px 8px;
-            font-size: 11px; border-radius: 4px;
+            color: white; padding: 3px 6px;
+            font-size: 10px; border-radius: 4px;
             font-weight: bold;
         }
-        .product-info { padding: 15px; flex-grow: 1; }
-        .product-cat { font-size: 12px; color: var(--text-muted); text-transform: uppercase; }
-        .product-title { font-size: 16px; margin: 5px 0; font-weight: 600; }
-        .product-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; }
+        .product-info { padding: 12px; flex-grow: 1; }
+        .product-cat { font-size: 11px; color: var(--text-muted); text-transform: uppercase; }
+        .product-title { font-size: 15px; margin: 4px 0; font-weight: 600; }
+        .product-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
         
         /* Kustom Jumlah Pembelian Kilo & Digital */
         .weight-selector-box, .digital-selector-box {
             background: #f8fafc;
             border: 1px solid var(--border-color);
-            padding: 8px;
+            padding: 6px;
             border-radius: 6px;
-            margin: 10px 0;
+            margin: 8px 0;
         }
-        .weight-selector-box label, .digital-selector-box label { font-size: 12px; font-weight: bold; color: var(--text-dark); display: block; margin-bottom: 4px;}
-        .weight-presets { display: flex; gap: 4px; margin-bottom: 6px; }
-        .weight-presets button { padding: 4px 6px; font-size: 11px; background: #e2e8f0; color: var(--text-dark); border-radius: 4px;}
+        .weight-selector-box label, .digital-selector-box label { font-size: 11px; font-weight: bold; color: var(--text-dark); display: block; margin-bottom: 3px;}
+        .weight-presets { display: flex; gap: 4px; margin-bottom: 4px; }
+        .weight-presets button { padding: 3px 5px; font-size: 10px; background: #e2e8f0; color: var(--text-dark); border-radius: 4px;}
         .weight-presets button.active { background: var(--primary-color); color: white; }
-        .weight-custom-input, .digital-custom-input { display: flex; align-items: center; gap: 5px; }
-        .weight-custom-input input, .digital-custom-input input { width: 100%; padding: 4px 8px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 13px; }
-        .weight-custom-input span, .digital-custom-input span { font-size: 12px; font-weight: bold; }
+        .weight-custom-input, .digital-custom-input { display: flex; align-items: center; gap: 4px; }
+        .weight-custom-input input, .digital-custom-input input { width: 100%; padding: 3px 6px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 12px; }
+        .weight-custom-input span, .digital-custom-input span { font-size: 11px; font-weight: bold; }
 
-        .product-price { font-size: 18px; color: var(--warning-color); font-weight: 700; }
-        .price-sub-calc { font-size: 12px; color: var(--text-muted); font-style: italic; margin-bottom: 5px; min-height: 18px;}
-        .product-action { padding: 0 15px 15px 15px; }
+        .product-price { font-size: 16px; color: var(--warning-color); font-weight: 700; }
+        .price-sub-calc { font-size: 11px; color: var(--text-muted); font-style: italic; margin-bottom: 4px; min-height: 16px;}
+        .product-action { padding: 0 12px 12px 12px; }
 
-        /* --- KERANJANG & CHECKOUT --- */
-        .cart-container { display: grid; grid-template-columns: 1fr; gap: 30px; }
-        @media (min-width: 768px) { .cart-container { grid-template-columns: 1.5fr 1fr; } }
+        /* --- KERANJANG & CHECKOUT (DIPERBAIKI RESPONSIFNYA) --- */
+        .cart-container { display: flex; flex-direction: column; gap: 20px; }
+        @media (min-width: 768px) { 
+            .cart-container { display: grid; grid-template-columns: 1.4fr 1fr; gap: 25px; } 
+        }
         .cart-item {
-            display: flex; align-items: center; background: white;
-            padding: 15px; border-radius: 8px; margin-bottom: 15px;
+            display: flex; flex-direction: column; gap: 10px; background: white;
+            padding: 12px; border-radius: 8px; margin-bottom: 12px;
             border: 1px solid var(--border-color);
         }
-        .cart-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 6px; margin-right: 15px; }
+        @media (min-width: 480px) {
+            .cart-item { flex-direction: row; align-items: center; }
+        }
+        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; }
         .cart-item-details { flex-grow: 1; }
-        .cart-qty-controls { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
-        .cart-qty-controls button { padding: 2px 8px; background: #e2e8f0; }
-        .checkout-wrapper { background: white; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); }
-        .order-summary { margin-bottom: 25px; background: #f8fafc; padding: 15px; border-radius: 6px; }
-        .summary-line { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        .summary-line.total { font-size: 18px; font-weight: 700; color: var(--success-color); margin-top: 8px; }
+        .cart-item-details h4 { font-size: 14px; }
+        .cart-qty-controls { display: flex; align-items: center; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+        .cart-qty-controls button { padding: 2px 6px; font-size: 11px; background: #e2e8f0; }
+        
+        .checkout-wrapper { background: white; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .order-summary { margin-bottom: 20px; background: #f8fafc; padding: 12px; border-radius: 6px; font-size: 13px; }
+        .summary-line { display: flex; justify-content: space-between; margin-bottom: 6px; }
+        .summary-line.total { font-size: 16px; font-weight: 700; color: var(--success-color); margin-top: 6px; }
         .note-payment-warning {
             background: #fff7ed; border: 1px solid #ffedd5;
-            padding: 10px; border-radius: 6px; font-size: 12px;
-            color: #c2410c; margin-bottom: 15px;
+            padding: 8px; border-radius: 6px; font-size: 11px;
+            color: #c2410c; margin-bottom: 12px;
         }
 
         /* --- FORM STYLE GENERAL --- */
-        .form-style h3 { margin-bottom: 15px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-size: 14px; font-weight: 600; }
+        .form-style h3 { margin-bottom: 12px; font-size: 16px; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 600; }
         .form-style input[type="text"],
         .form-style input[type="number"],
         .form-style input[type="password"],
@@ -304,49 +324,50 @@
         .form-style input[type="color"],
         .form-style select,
         .form-style textarea {
-            width: 100%; padding: 10px; border: 1px solid var(--border-color);
-            border-radius: 6px; outline: none; font-size: 14px;
+            width: 100%; padding: 8px 10px; border: 1px solid var(--border-color);
+            border-radius: 6px; outline: none; font-size: 13px;
         }
-        .form-style input[type="color"] { height: 40px; padding: 2px; cursor: pointer; }
-        .form-style textarea { height: 80px; resize: vertical; }
+        .form-style input[type="color"] { height: 36px; padding: 2px; cursor: pointer; }
+        .form-style textarea { height: 70px; resize: vertical; }
 
         /* --- PANEL AUTH (ADMIN) --- */
         .auth-box {
-            max-width: 400px; margin: 50px auto; background: white;
-            padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            max-width: 380px; margin: 30px auto; background: white;
+            padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
             border: 1px solid var(--border-color);
         }
-        .auth-box h2 { text-align: center; margin-bottom: 20px; }
-        .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted); }
+        .auth-box h2 { text-align: center; margin-bottom: 15px; font-size: 20px; }
+        .auth-switch { text-align: center; margin-top: 12px; font-size: 12px; color: var(--text-muted); }
         .auth-switch span { color: var(--primary-color); cursor: pointer; font-weight: bold; }
 
         /* --- DASHBOARD ADMIN LAYOUT --- */
         .admin-header {
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 25px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px;
+            margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px;
+            flex-wrap: wrap; gap: 10px;
         }
-        .admin-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
-        @media (min-width: 992px) { .admin-grid { grid-template-columns: 1fr 2fr; } }
-        .card { background: white; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 20px; }
-        .card h3 { margin-bottom: 15px; font-size: 18px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+        .admin-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 992px) { .admin-grid { grid-template-columns: 1fr 1.8fr; } }
+        .card { background: white; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 15px; }
+        .card h3 { margin-bottom: 12px; font-size: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; }
 
         /* TABLE ADMIN */
-        .table-responsive { overflow-x: auto; }
-        .admin-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 10px;}
-        .admin-table th, .admin-table td { padding: 10px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .admin-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 10px; min-width: 500px;}
+        .admin-table th, .admin-table td { padding: 8px; text-align: left; border-bottom: 1px solid var(--border-color); }
         .admin-table th { background: #f1f5f9; font-weight: 600; }
-        .admin-table td img { width: 40px; height: 40px; object-fit: cover; border-radius: 4px; }
-        .badge-stock { padding: 2px 6px; font-size: 11px; border-radius: 4px; font-weight: bold; }
+        .admin-table td img { width: 35px; height: 35px; object-fit: cover; border-radius: 4px; }
+        .badge-stock { padding: 2px 5px; font-size: 10px; border-radius: 4px; font-weight: bold; }
         .badge-stock.in { background: #dcfce7; color: #16a34a; }
         .badge-stock.out { background: #fee2e2; color: #dc2626; }
 
-        .btn-actions-group { display: flex; gap: 5px; flex-wrap: wrap; }
-        .btn-actions-group button { padding: 4px 8px; font-size: 11px; }
+        .btn-actions-group { display: flex; gap: 4px; flex-wrap: wrap; }
+        .btn-actions-group button { padding: 3px 6px; font-size: 10px; }
 
         /* --- FOOTER --- */
         footer {
-            background: white; margin-top: 20px; padding: 20px 0;
-            border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 14px;
+            background: white; margin-top: 15px; padding: 15px 0;
+            border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 13px;
         }
     </style>
 </head>
@@ -406,6 +427,7 @@
             <div class="cart-container">
                 <div class="cart-items-wrapper">
                     <div id="cart-items-list"></div>
+                    <button type="button" id="btn-clear-cart" class="btn-danger btn-block hidden" style="margin-top: 10px;"><i class="fas fa-trash-alt"></i> Kosongkan Keranjang</button>
                 </div>
 
                 <div class="checkout-wrapper">
@@ -413,7 +435,7 @@
                         <h3>Ringkasan Belanja</h3>
                         <div class="summary-line"><span>Subtotal Barang:</span> <span id="summary-subtotal">Rp 0</span></div>
                         <div class="summary-line"><span>Ongkos Kirim:</span> <span id="summary-shipping">Ditentukan Admin</span></div>
-                        <hr>
+                        <hr style="margin: 6px 0; border: none; border-top: 1px solid var(--border-color);">
                         <div class="summary-line total"><span>Total Bayar:</span> <span id="summary-total">Rp 0</span></div>
                     </div>
 
@@ -555,7 +577,7 @@
                                     <textarea id="prod-desc" required></textarea>
                                 </div>
                                 <button type="submit" id="btn-submit-product" class="btn-block btn-success">Simpan Produk</button>
-                                <button type="button" id="btn-cancel-edit" class="btn-block btn-secondary hidden">Batal Edit</button>
+                                <button type="button" id="btn-cancel-edit" class="btn-block btn-secondary hidden" style="margin-top: 5px;">Batal Edit</button>
                             </form>
                         </div>
                     </div>
@@ -615,7 +637,7 @@
                                 <button type="button" id="btn-clear-broadcast" class="btn-block btn-secondary" style="margin-top: 5px;">Hapus Pengumuman Aktif</button>
                             </form>
 
-                            <h4 style="margin-top: 20px; border-top: 1px dashed var(--border-color); padding-top: 10px;">Arsip Histori Pengumuman</h4>
+                            <h4 style="margin-top: 20px; border-top: 1px dashed var(--border-color); padding-top: 10px; font-size: 14px;">Arsip Histori Pengumuman</h4>
                             <div class="table-responsive">
                                 <table class="admin-table">
                                     <thead>
@@ -667,10 +689,14 @@
 
         let products = [];
         let adminUsers = [];
-        let cart = [];
+        let cart = JSON.parse(localStorage.getItem('adidin_cart')) || [];
         let currentLoggedInAdmin = null;
 
-        // Otomatis sembunyikan/kosongkan input harga jika memilih jenis digital di admin
+        function saveCartToLocalStorage() {
+            localStorage.setItem('adidin_cart', JSON.stringify(cart));
+            updateCartBadge();
+        }
+
         function handleUnitTypeChange() {
             const unitType = document.getElementById('prod-unit-type').value;
             const priceGroup = document.getElementById('price-form-group');
@@ -869,7 +895,7 @@
                         </div>
                     `;
                 } else if(isDigital && p.available) {
-                    displayPriceHtml = `<span style="font-size:14px;color:var(--text-muted);">Masukkan Nominal Top Up / Tagihan:</span><br><span id="display-price-${p.id}">Rp 0</span>`;
+                    displayPriceHtml = `<span style="font-size:13px;color:var(--text-muted);">Masukkan Nominal Top Up / Tagihan:</span><br><span id="display-price-${p.id}">Rp 0</span>`;
                     htmlWeightControl = `
                         <div class="digital-selector-box">
                             <label>Ketik Jumlah Nominal Uang (Rp):</label>
@@ -941,27 +967,20 @@
             }
         };
 
-        // Mengatur Klik Pembelian
         window.handleBuyClick = function(id) {
             const prod = products.find(p => p.id == id);
             if (!prod || !prod.available) return;
 
             let buyQty = 1; 
-            let labelBeli = "Pcs";
             let customPrice = prod.price;
 
             if(prod.unitType === 'kg') {
                 const inputField = document.getElementById(`input-weight-${id}`);
                 buyQty = parseFloat(inputField.value) || 0;
-                labelBeli = "Kg";
                 if(buyQty <= 0) {
                     alert("Jumlah kilo pembelian tidak valid!");
                     return;
                 }
-            } else if (prod.unitType === 'dus') {
-                labelBeli = "Dus";
-            } else if (prod.unitType === 'renteng') {
-                labelBeli = "Renteng";
             } else if (prod.unitType === 'digital') {
                 const inputField = document.getElementById(`input-digital-${id}`);
                 const nominal = parseInt(inputField.value) || 0;
@@ -971,38 +990,43 @@
                 }
                 customPrice = nominal; 
                 buyQty = 1;
-                labelBeli = "Transaksi";
             }
 
-            const cartItem = cart.find(item => item.product.id == id && item.unitChosen === prod.unitType && item.product.price === customPrice);
-            if(cartItem && prod.unitType !== 'digital') {
-                cartItem.qty += buyQty;
+            const existingIndex = cart.findIndex(item => item.product.id == id && item.unitChosen === prod.unitType && item.product.price === customPrice);
+            if(existingIndex > -1 && prod.unitType !== 'digital') {
+                cart[existingIndex].qty += buyQty;
             } else {
                 const productCopy = { ...prod, price: customPrice };
                 cart.push({ product: productCopy, qty: buyQty, unitChosen: prod.unitType });
             }
             
-            updateCartBadge();
+            saveCartToLocalStorage();
             alert(`${prod.name} sukses dimasukkan ke keranjang.`);
         };
 
         function updateCartBadge() {
-            document.getElementById('cart-count').innerText = cart.length;
+            const countEl = document.getElementById('cart-count');
+            if(countEl) countEl.innerText = cart.length;
         }
+        updateCartBadge();
 
 
         // ================= MANAGEMENT KERANJANG BELANJA =================
         function renderCart() {
             const listElement = document.getElementById('cart-items-list');
+            const clearCartBtn = document.getElementById('btn-clear-cart');
             if(!listElement) return;
             listElement.innerHTML = '';
             
             if(cart.length === 0) {
-                listElement.innerHTML = '<p class="text-center" style="padding:20px; color:var(--text-muted); padding: 40px 0;">Keranjang Anda masih kosong.</p>';
+                listElement.innerHTML = '<p class="text-center" style="padding:30px; color:var(--text-muted);">Keranjang Anda masih kosong.</p>';
+                if(clearCartBtn) clearCartBtn.classList.add('hidden');
                 document.getElementById('summary-subtotal').innerText = "Rp 0";
                 document.getElementById('summary-total').innerText = "Rp 0";
                 return;
             }
+
+            if(clearCartBtn) clearCartBtn.classList.remove('hidden');
 
             let subtotal = 0;
             cart.forEach((item, index) => {
@@ -1017,7 +1041,7 @@
                 if(isKg) displayQty = `${item.qty} Kg`;
                 else if(isDus) displayQty = `${item.qty} Dus`;
                 else if(isRenteng) displayQty = `${item.qty} Renteng`;
-                else if(isDigital) displayQty = "1 Kali";
+                else if(isDigital) displayQty = "1 Transaksi";
 
                 const stepChange = isKg ? 0.25 : 1;
 
@@ -1027,21 +1051,23 @@
                     <img src="${item.product.img}" alt="${item.product.name}">
                     <div class="cart-item-details">
                         <h4>${item.product.name}</h4>
-                        <p style="color:var(--text-muted); font-size:12px;">Jenis Satuan: ${item.unitChosen.toUpperCase()}</p>
+                        <p style="color:var(--text-muted); font-size:11px;">Satuan: ${item.unitChosen.toUpperCase()}</p>
                         <div class="cart-qty-controls">
                             ${isDigital ? '' : `<button type="button" onclick="changeCartQty(${index}, -${stepChange})">-</button>`}
-                            <span style="font-weight:bold; color:var(--primary-color);">${displayQty}</span>
+                            <span style="font-weight:bold; color:var(--primary-color); font-size:13px;">${displayQty}</span>
                             ${isDigital ? '' : `<button type="button" onclick="changeCartQty(${index}, ${stepChange})">+</button>`}
-                            ${isDigital ? `<button type="button" class="btn-danger" style="padding:2px 6px;font-size:11px;" onclick="changeCartQty(${index}, -1)">Hapus</button>` : ''}
                         </div>
                     </div>
-                    <div style="font-weight:bold; color:var(--warning-color)">Rp ${itemCost.toLocaleString('id-ID')}</div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+                        <div style="font-weight:bold; color:var(--warning-color); font-size:14px;">Rp ${itemCost.toLocaleString('id-ID')}</div>
+                        <button type="button" class="btn-danger" style="padding:3px 8px;font-size:11px;" onclick="removeCartItem(${index})"><i class="fas fa-trash"></i> Hapus</button>
+                    </div>
                 `;
                 listElement.appendChild(row);
             });
 
             document.getElementById('summary-subtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
-            document.getElementById('summary-total').innerText = `Rp ${subtotal.toLocaleString('id-ID')} (+ Ongkir Manual jika ada)`;
+            document.getElementById('summary-total').innerText = `Rp ${subtotal.toLocaleString('id-ID')} (+ Ongkir Manual)`;
         }
 
         window.changeCartQty = function(index, delta) {
@@ -1051,9 +1077,25 @@
                     cart.splice(index, 1);
                 }
             }
-            updateCartBadge();
+            saveCartToLocalStorage();
             renderCart();
         };
+
+        window.removeCartItem = function(index) {
+            cart.splice(index, 1);
+            saveCartToLocalStorage();
+            renderCart();
+        };
+
+        if(document.getElementById('btn-clear-cart')) {
+            document.getElementById('btn-clear-cart').addEventListener('click', () => {
+                if(confirm("Kosongkan seluruh isi keranjang belanja?")) {
+                    cart = [];
+                    saveCartToLocalStorage();
+                    renderCart();
+                }
+            });
+        }
 
         // CHECKOUT LOGIC 
         document.getElementById('checkout-form').addEventListener('submit', function(e) {
@@ -1105,7 +1147,7 @@
                 const waUrl = `https://api.whatsapp.com/send?phone=${MAIN_WA_NUMBER}&text=${encodeURIComponent(textMessage)}`;
                 
                 cart = [];
-                updateCartBadge();
+                saveCartToLocalStorage();
                 this.reset();
                 
                 window.open(waUrl, '_blank');
@@ -1243,15 +1285,15 @@
                     </td>
                     <td><pre style="font-size:11px; font-family:inherit;">${order.itemsSummary}Waktu Kirim: ${order.timeOption}\nCatatan: ${order.note}</pre></td>
                     <td>
-                        <input type="number" value="${order.shippingFee || 0}" style="width:90px; padding:4px;" onchange="updateManualShipping('${order.id}', this.value)">
+                        <input type="number" value="${order.shippingFee || 0}" style="width:80px; padding:3px;" onchange="updateManualShipping('${order.id}', this.value)">
                     </td>
                     <td><strong>Rp ${totalTagihan.toLocaleString('id-ID')}</strong></td>
                     <td>
                         <div class="btn-actions-group">
                             <button class="btn-primary" style="background:#0284c7" onclick="sendStatusWa('${order.id}', 'process')"><i class="fab fa-whatsapp"></i> Proses</button>
-                            <button class="btn-success" onclick="sendStatusWa('${order.id}', 'paid')"><i class="fab fa-whatsapp"></i> Lunas & Kirim</button>
-                            <button class="btn-danger" style="background:#ea580c" onclick="sendStatusWa('${order.id}', 'outofstock')"><i class="fab fa-whatsapp"></i> Stok Habis</button>
-                            <button class="btn-danger" onclick="deleteOrderHistory('${order.id}')"><i class="fas fa-trash-alt"></i> Hapus</button>
+                            <button class="btn-success" onclick="sendStatusWa('${order.id}', 'paid')"><i class="fab fa-whatsapp"></i> Lunas</button>
+                            <button class="btn-danger" style="background:#ea580c" onclick="sendStatusWa('${order.id}', 'outofstock')"><i class="fab fa-whatsapp"></i> Habis</button>
+                            <button class="btn-danger" onclick="deleteOrderHistory('${order.id}')"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </td>
                 `;
@@ -1381,7 +1423,7 @@
                         <div class="btn-actions-group">
                             <button class="btn-secondary" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i></button>
                             <button class="${p.available ? 'btn-danger' : 'btn-success'}" onclick="toggleStock('${p.id}', ${p.available})">
-                                ${p.available ? 'Set Kosong' : 'Set Ada'}
+                                ${p.available ? 'Kosong' : 'Ada'}
                             </button>
                             <button class="btn-danger" style="background:#451a03" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash-alt"></i></button>
                         </div>
