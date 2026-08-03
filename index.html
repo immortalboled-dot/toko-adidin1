@@ -284,7 +284,7 @@
         .price-sub-calc { font-size: 11px; color: var(--text-muted); font-style: italic; margin-bottom: 4px; min-height: 16px;}
         .product-action { padding: 0 12px 12px 12px; }
 
-        /* --- KERANJANG & CHECKOUT (DIPERBAIKI RESPONSIFNYA) --- */
+        /* --- KERANJANG & CHECKOUT --- */
         .cart-container { display: flex; flex-direction: column; gap: 20px; }
         @media (min-width: 768px) { 
             .cart-container { display: grid; grid-template-columns: 1.4fr 1fr; gap: 25px; } 
@@ -992,15 +992,16 @@
                 buyQty = 1;
             }
 
-            const existingIndex = cart.findIndex(item => item.product.id == id && item.unitChosen === prod.unitType && item.product.price === customPrice);
-            if(existingIndex > -1 && prod.unitType !== 'digital') {
-                cart[existingIndex].qty += buyQty;
-            } else {
-                const productCopy = { ...prod, price: customPrice };
-                cart.push({ product: productCopy, qty: buyQty, unitChosen: prod.unitType });
-            }
+            // PERBAIKAN UTAMA: Push item unik ke keranjang tanpa menimpa produk berbeda ID/jenis
+            cart.push({ 
+                cartUniqueId: Date.now() + Math.random(), 
+                product: { ...prod, price: customPrice }, 
+                qty: buyQty, 
+                unitChosen: prod.unitType 
+            });
             
             saveCartToLocalStorage();
+            renderCart();
             alert(`${prod.name} sukses dimasukkan ke keranjang.`);
         };
 
