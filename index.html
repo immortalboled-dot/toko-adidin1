@@ -689,7 +689,18 @@
 
         let products = [];
         let adminUsers = [];
-        let cart = JSON.parse(localStorage.getItem('adidin_cart')) || [];
+        
+        // Membersihkan cache lama di localStorage agar format data keranjang array objek unik terbaca sempurna
+        let rawCart = localStorage.getItem('adidin_cart');
+        let cart = [];
+        try {
+            cart = rawCart ? JSON.parse(rawCart) : [];
+            // Jika struktur data lama berupa objek ter-merge/bukan array, reset ke array kosong
+            if (!Array.isArray(cart)) cart = [];
+        } catch(e) {
+            cart = [];
+        }
+
         let currentLoggedInAdmin = null;
 
         function saveCartToLocalStorage() {
@@ -992,16 +1003,16 @@
                 buyQty = 1;
             }
 
-            // PERBAIKAN UTAMA: Push item unik ke keranjang tanpa menimpa produk berbeda ID/jenis
+            // Memastikan setiap klik memasukkan objek baru sebagai baris terpisah di keranjang
             cart.push({ 
-                cartUniqueId: Date.now() + Math.random(), 
+                uniqueKey: 'item_' + Date.now() + '_' + Math.random(),
                 product: { ...prod, price: customPrice }, 
                 qty: buyQty, 
                 unitChosen: prod.unitType 
             });
             
             saveCartToLocalStorage();
-            renderCart();
+            updateCartBadge();
             alert(`${prod.name} sukses dimasukkan ke keranjang.`);
         };
 
@@ -1035,7 +1046,7 @@
                 const isDigital = item.unitChosen === 'digital';
                 const isDus = item.unitChosen === 'dus';
                 const isRenteng = item.unitChosen === 'renteng';
-                const itemCost = Math.round(item.product.price * item.qty);
+                const itemCost = Math.round((item.product.price || 0) * (item.qty || 1));
                 subtotal += itemCost;
                 
                 let displayQty = `${item.qty} Pcs`;
@@ -1049,10 +1060,10 @@
                 const row = document.createElement('div');
                 row.className = 'cart-item';
                 row.innerHTML = `
-                    <img src="${item.product.img}" alt="${item.product.name}">
+                    <img src="${item.product.img || ''}" alt="${item.product.name || 'Produk'}">
                     <div class="cart-item-details">
-                        <h4>${item.product.name}</h4>
-                        <p style="color:var(--text-muted); font-size:11px;">Satuan: ${item.unitChosen.toUpperCase()}</p>
+                        <h4>${item.product.name || 'Produk'}</h4>
+                        <p style="color:var(--text-muted); font-size:11px;">Satuan: ${(item.unitChosen || 'pcs').toUpperCase()}</p>
                         <div class="cart-qty-controls">
                             ${isDigital ? '' : `<button type="button" onclick="changeCartQty(${index}, -${stepChange})">-</button>`}
                             <span style="font-weight:bold; color:var(--primary-color); font-size:13px;">${displayQty}</span>
@@ -1073,7 +1084,7 @@
 
         window.changeCartQty = function(index, delta) {
             if(cart[index]) {
-                cart[index].qty = parseFloat((cart[index].qty + delta).toFixed(2));
+                cart[index].qty = parseFloat(((cart[index].qty || 1) + delta).toFixed(2));
                 if(cart[index].qty <= 0) {
                     cart.splice(index, 1);
                 }
