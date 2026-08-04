@@ -1,8 +1,10 @@
 {
   "name": "Toko Online A'Didin",
   "short_name": "A'Didin",
+  "description": "Aplikasi pengelolaan toko online dan pemesanan UMKM A'Didin",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#f8fafc",
   "theme_color": "#2563eb",
   "icons": [
