@@ -495,7 +495,8 @@
                         <div class="summary-line"><span>Subtotal Barang:</span> <span id="summary-subtotal">Rp 0</span></div>
                         <div class="summary-line"><span>Ongkos Kirim:</span> <span id="summary-shipping">Ditentukan Admin</span></div>
                         <hr style="margin: 5px 0; border: none; border-top: 1px solid var(--border-color);">
-                        <div class="summary-line total"><span>Total Bayar:</span> <span id="summary-total">Rp 0</span></div>
+                        <!-- Tulisan "Bayar" dihapus dan diganti menjadi "Total:" -->
+                        <div class="summary-line total"><span>Total:</span> <span id="summary-total">Rp 0 (+ Ongkir Manual)</span></div>
                     </div>
 
                     <form id="checkout-form" class="form-style">
@@ -1211,7 +1212,7 @@
                 itemsSummary: itemText,
                 subtotal: subtotal,
                 shippingFee: 0,
-                orderStatus: 'active', // Status awal pesanan baru adalah aktif
+                orderStatus: 'active',
                 statusLabelText: 'Pesanan Aktif'
             };
 
@@ -1416,10 +1417,9 @@
                     newStatus = 'active';
                 } else if (statusType === 'completed') {
                     msg = `*INFO TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\n*Pesanan selesai, terima kasih* banyak telah berbelanja di toko kami! 🙏✨\n\n⚠️ *Catatan Sistem:* Toko kami berkomitmen memajukan UMKM Lokal secara sehat, mohon maaf *TIDAK MENERIMA / TIDAK BOLEH HUTANG*. Sampai jumpa di pesanan berikutnya!`;
-                    newStatus = 'completed'; // Mengubah ciri pesanan menjadi Selesai (Tidak Aktif)
+                    newStatus = 'completed';
                 }
 
-                // Update status di Firebase secara otomatis
                 db.ref(`orderHistory/${id}`).update({ orderStatus: newStatus }).then(() => {
                     window.open(`https://api.whatsapp.com/send?phone=${phoneClean}&text=${encodeURIComponent(msg)}`, '_blank');
                 });
