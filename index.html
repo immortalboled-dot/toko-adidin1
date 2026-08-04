@@ -350,7 +350,7 @@
         .card { background: white; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 12px; }
         .card h3 { margin-bottom: 10px; font-size: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
 
-        /* TABEL ADMIN YANG SANGAT RESPONSIF DI LAYAR KECIL HP */
+        /* TABEL ADMIN YANG RESPONSIF */
         .table-responsive { 
             width: 100%;
             overflow-x: auto; 
@@ -363,28 +363,41 @@
             width: 100%; 
             border-collapse: collapse; 
             font-size: 11px; 
-            min-width: 650px; 
+            min-width: 680px; 
         }
         .admin-table th, .admin-table td { 
             padding: 8px 10px; 
             text-align: left; 
             border-bottom: 1px solid var(--border-color); 
-            white-space: nowrap; 
         }
-        .admin-table th { background: #f1f5f9; font-weight: 600; }
+        .admin-table th { background: #f1f5f9; font-weight: 600; white-space: nowrap; }
         .admin-table td img { width: 30px; height: 30px; object-fit: cover; border-radius: 4px; }
         
         .admin-table td.detail-cell, .admin-table th.detail-header {
-            white-space: normal;
             min-width: 180px;
         }
 
-        .badge-stock { padding: 2px 4px; font-size: 9px; border-radius: 4px; font-weight: bold; }
+        .badge-stock { padding: 2px 4px; font-size: 9px; border-radius: 4px; font-weight: bold; white-space: nowrap; }
         .badge-stock.in { background: #dcfce7; color: #16a34a; }
         .badge-stock.out { background: #fee2e2; color: #dc2626; }
 
-        .btn-actions-group { display: flex; gap: 3px; flex-wrap: wrap; }
-        .btn-actions-group button { padding: 3px 5px; font-size: 10px; }
+        /* KELOMPOK TOMBOL AKSI ADMIN (VERTIKAL & RESPONSIF) */
+        .btn-actions-group { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 5px; 
+            min-width: 230px;
+        }
+        .btn-actions-group button { 
+            padding: 5px 8px; 
+            font-size: 11px; 
+            text-align: left; 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            width: 100%;
+            white-space: normal;
+        }
 
         /* --- FOOTER --- */
         footer {
@@ -617,7 +630,7 @@
                                             <th class="detail-header">Detail Belanja</th>
                                             <th>Ongkir Manual (Rp)</th>
                                             <th>Total</th>
-                                            <th>Aksi WhatsApp / Hapus</th>
+                                            <th>Aksi & Status WhatsApp</th>
                                         </tr>
                                     </thead>
                                     <tbody id="admin-history-table">
@@ -817,7 +830,7 @@
 
         db.ref('broadcastHistory').on('value', (snapshot) => {
             const data = snapshot.val();
-            const broadcastList = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })).reverse() : [];
+            const broadcastList = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
             if(currentLoggedInAdmin) renderAdminBroadcastHistory(broadcastList);
         });
 
@@ -1232,7 +1245,7 @@
             const found = adminUsers.find(a => a.username === user && a.password === pass);
             if(found) {
                 currentLoggedInAdmin = found;
-                localStorage.setItem('adidin_admin_session', JSON.stringify(found)); // Simpan sesi login
+                localStorage.setItem('adidin_admin_session', JSON.stringify(found));
                 alert("Selamat Datang Admin!");
                 checkAdminSession();
             } else {
@@ -1242,7 +1255,7 @@
 
         document.getElementById('btn-logout').addEventListener('click', () => {
             currentLoggedInAdmin = null;
-            localStorage.removeItem('adidin_admin_session'); // Hapus sesi saat logout
+            localStorage.removeItem('adidin_admin_session');
             checkAdminSession();
         });
 
@@ -1328,10 +1341,11 @@
                     <td><strong>Rp ${totalTagihan.toLocaleString('id-ID')}</strong></td>
                     <td>
                         <div class="btn-actions-group">
-                            <button class="btn-primary" style="background:#0284c7" onclick="sendStatusWa('${order.id}', 'process')" title="Proses"><i class="fab fa-whatsapp"></i></button>
-                            <button class="btn-success" onclick="sendStatusWa('${order.id}', 'paid')" title="Lunas"><i class="fab fa-whatsapp"></i></button>
-                            <button class="btn-danger" style="background:#ea580c" onclick="sendStatusWa('${order.id}', 'outofstock')" title="Habis"><i class="fab fa-whatsapp"></i></button>
-                            <button class="btn-danger" onclick="deleteOrderHistory('${order.id}')" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                            <button class="btn-primary" style="background:#0284c7" onclick="sendStatusWa('${order.id}', 'received')"><i class="fab fa-whatsapp"></i> Pesanan sudah di terima</button>
+                            <button class="btn-primary" style="background:#d97706" onclick="sendStatusWa('${order.id}', 'process')"><i class="fab fa-whatsapp"></i> Mohon tunggu pesanan sedang di proses</button>
+                            <button class="btn-whatsapp" onclick="sendStatusWa('${order.id}', 'delivering')"><i class="fab fa-whatsapp"></i> Pesanan sedang di antar & siapkan uang tunai</button>
+                            <button class="btn-success" onclick="sendStatusWa('${order.id}', 'completed')"><i class="fab fa-whatsapp"></i> Pesanan selesai terimakasih</button>
+                            <button class="btn-danger" onclick="deleteOrderHistory('${order.id}')"><i class="fas fa-trash-alt"></i> Hapus Histori</button>
                         </div>
                     </td>
                 `;
@@ -1359,12 +1373,14 @@
                 const total = order.subtotal + (parseInt(order.shippingFee) || 0);
                 let phoneClean = order.buyerPhone.startsWith('0') ? '62' + order.buyerPhone.slice(1) : order.buyerPhone;
 
-                if (statusType === 'process') {
-                    msg = `*UPDATE TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPesanan digital/fisik Anda saat ini sedang dalam *PROSES / PENGIRIMAN*. \n\n*Rincian:\n• Subtotal: Rp ${order.subtotal.toLocaleString('id-ID')}\n• Biaya Admin/Ongkir: Rp ${(order.shippingFee || 0).toLocaleString('id-ID')}\n• Total Bayar: Rp ${total.toLocaleString('id-ID')}\n\nMohon ditunggu ya! 📦🚀`;
-                } else if (statusType === 'paid') {
-                    msg = `*PESANAN SELESAI - TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPembayaran sebesar *Rp ${total.toLocaleString('id-ID')}* telah kami terima dengan baik (*LUNAS/BERHASIL*).\n\n⚠️ *Pemberitahuan Sistem:* Toko kami berkomitmen memajukan UMKM Lokal secara sehat, mohon maaf *TIDAK MENERIMA / TIDAK BOLEH HUTANG*. Terima kasih banyak atas dukungan Anda! 🙏✨`;
-                } else if (statusType === 'outofstock') {
-                    msg = `*PEMBERITAHUAN TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\n\nMohon maaf sekali 🙏, produk/layanan yang baru saja Kakak pesan berikut ini:\n\n${order.itemsSummary}\nSaat ini sedang *KOSONG / HABIS STOK* dan luput dari kontrol sistem admin kami.\n\nPesanan Kakak terpaksa kami batalkan sementara waktu. Silakan cek produk kami yang lain atau lakukan konfirmasi ulang jika ada hal yang ingin ditanyakan. Terima kasih banyak atas pengertiannya ya Kak! 😊✨`;
+                if (statusType === 'received') {
+                    msg = `*INFO TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPesanan Anda telah *pesanan sudah di terima* oleh sistem kami. Terima kasih! 😊`;
+                } else if (statusType === 'process') {
+                    msg = `*INFO TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\n*Mohon tunggu, pesanan sedang di proses* oleh tim kami ya. 🙏✨`;
+                } else if (statusType === 'delivering') {
+                    msg = `*INFO TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\n*Pesanan sedang di antar*. Total tagihan sebesar *Rp ${total.toLocaleString('id-ID')}* (*Mohon siapkan uang tunai* pas/sesuai nominal). Terima kasih! 🛵💵`;
+                } else if (statusType === 'completed') {
+                    msg = `*INFO TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\n*Pesanan selesai, terima kasih* banyak telah berbelanja di toko kami! 🙏✨\n\n⚠️ *Catatan Sistem:* Toko kami berkomitmen memajukan UMKM Lokal secara sehat, mohon maaf *TIDAK MENERIMA / TIDAK BOLEH HUTANG*. Sampai jumpa di pesanan berikutnya!`;
                 }
                 window.open(`https://api.whatsapp.com/send?phone=${phoneClean}&text=${encodeURIComponent(msg)}`, '_blank');
             });
@@ -1458,12 +1474,12 @@
                     <td>${displayPriceText}</td>
                     <td><span class="badge-stock ${p.available ? 'in' : 'out'}">${p.available ? 'Tersedia' : 'Kosong'}</span></td>
                     <td>
-                        <div class="btn-actions-group">
-                            <button class="btn-secondary" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i></button>
+                        <div class="btn-actions-group" style="min-width: 130px;">
+                            <button class="btn-secondary" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i> Edit</button>
                             <button class="${p.available ? 'btn-danger' : 'btn-success'}" onclick="toggleStock('${p.id}', ${p.available})">
-                                ${p.available ? 'Kosong' : 'Ada'}
+                                ${p.available ? 'Set Kosong' : 'Set Ada'}
                             </button>
-                            <button class="btn-danger" style="background:#451a03" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash-alt"></i></button>
+                            <button class="btn-danger" style="background:#451a03" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash-alt"></i> Hapus</button>
                         </div>
                     </td>
                 `;
@@ -1501,7 +1517,6 @@
             }
         };
 
-        // Otomatis cek status sesi admin saat halaman dimuat
         checkAdminSession();
         switchPage('buyer');
     </script>
