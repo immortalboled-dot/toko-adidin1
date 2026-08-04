@@ -339,7 +339,7 @@
         .auth-switch { text-align: center; margin-top: 10px; font-size: 11px; color: var(--text-muted); }
         .auth-switch span { color: var(--primary-color); cursor: pointer; font-weight: bold; }
 
-        /* --- DASHBOARD ADMIN LAYOUT (DIPERBAIKI AGAR RESPONSIF) --- */
+        /* --- DASHBOARD ADMIN LAYOUT --- */
         .admin-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;
@@ -350,7 +350,7 @@
         .card { background: white; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 12px; }
         .card h3 { margin-bottom: 10px; font-size: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
 
-        /* TABEL ADMIN YANG LEBIH RESPONSIF & FLEKSIBEL DI HP */
+        /* TABEL ADMIN YANG SANGAT RESPONSIF DI LAYAR KECIL HP */
         .table-responsive { 
             width: 100%;
             overflow-x: auto; 
@@ -363,18 +363,17 @@
             width: 100%; 
             border-collapse: collapse; 
             font-size: 11px; 
-            min-width: 600px; /* Memastikan tabel tidak tertekan ekstrem dan dapat di-scroll horizontal dengan nyaman */
+            min-width: 650px; 
         }
         .admin-table th, .admin-table td { 
             padding: 8px 10px; 
             text-align: left; 
             border-bottom: 1px solid var(--border-color); 
-            white-space: nowrap; /* Mencegah teks terpotong aneh */
+            white-space: nowrap; 
         }
         .admin-table th { background: #f1f5f9; font-weight: 600; }
         .admin-table td img { width: 30px; height: 30px; object-fit: cover; border-radius: 4px; }
         
-        /* Membolehkan kolom detail belanja terbungkus rapi */
         .admin-table td.detail-cell, .admin-table th.detail-header {
             white-space: normal;
             min-width: 180px;
@@ -621,7 +620,9 @@
                                             <th>Aksi WhatsApp / Hapus</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="admin-history-table"></tbody>
+                                    <tbody id="admin-history-table">
+                                        <tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:15px;">Memuat data histori...</td></tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -722,7 +723,8 @@
             cart = [];
         }
 
-        let currentLoggedInAdmin = null;
+        // Persistent Session Login Admin
+        let currentLoggedInAdmin = localStorage.getItem('adidin_admin_session') ? JSON.parse(localStorage.getItem('adidin_admin_session')) : null;
 
         function saveCartToLocalStorage() {
             localStorage.setItem('adidin_cart', JSON.stringify(cart));
@@ -806,10 +808,11 @@
             adminUsers = data ? Object.values(data) : [{ username: "admin", password: "123", whatsapp: "628991286742" }];
         });
 
+        // Data Histori selalu aktif sinkronisasinya agar otomatis muncul saat login/refresh
         db.ref('orderHistory').on('value', (snapshot) => {
             const data = snapshot.val();
             const historyList = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })).reverse() : [];
-            if(currentLoggedInAdmin) renderAdminHistoryTable(historyList);
+            renderAdminHistoryTable(historyList);
         });
 
         db.ref('broadcastHistory').on('value', (snapshot) => {
@@ -1229,6 +1232,7 @@
             const found = adminUsers.find(a => a.username === user && a.password === pass);
             if(found) {
                 currentLoggedInAdmin = found;
+                localStorage.setItem('adidin_admin_session', JSON.stringify(found)); // Simpan sesi login
                 alert("Selamat Datang Admin!");
                 checkAdminSession();
             } else {
@@ -1238,6 +1242,7 @@
 
         document.getElementById('btn-logout').addEventListener('click', () => {
             currentLoggedInAdmin = null;
+            localStorage.removeItem('adidin_admin_session'); // Hapus sesi saat logout
             checkAdminSession();
         });
 
@@ -1323,10 +1328,10 @@
                     <td><strong>Rp ${totalTagihan.toLocaleString('id-ID')}</strong></td>
                     <td>
                         <div class="btn-actions-group">
-                            <button class="btn-primary" style="background:#0284c7" onclick="sendStatusWa('${order.id}', 'process')"><i class="fab fa-whatsapp"></i></button>
-                            <button class="btn-success" onclick="sendStatusWa('${order.id}', 'paid')"><i class="fab fa-whatsapp"></i></button>
-                            <button class="btn-danger" style="background:#ea580c" onclick="sendStatusWa('${order.id}', 'outofstock')"><i class="fab fa-whatsapp"></i></button>
-                            <button class="btn-danger" onclick="deleteOrderHistory('${order.id}')"><i class="fas fa-trash-alt"></i></button>
+                            <button class="btn-primary" style="background:#0284c7" onclick="sendStatusWa('${order.id}', 'process')" title="Proses"><i class="fab fa-whatsapp"></i></button>
+                            <button class="btn-success" onclick="sendStatusWa('${order.id}', 'paid')" title="Lunas"><i class="fab fa-whatsapp"></i></button>
+                            <button class="btn-danger" style="background:#ea580c" onclick="sendStatusWa('${order.id}', 'outofstock')" title="Habis"><i class="fab fa-whatsapp"></i></button>
+                            <button class="btn-danger" onclick="deleteOrderHistory('${order.id}')" title="Hapus"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </td>
                 `;
@@ -1496,6 +1501,8 @@
             }
         };
 
+        // Otomatis cek status sesi admin saat halaman dimuat
+        checkAdminSession();
         switchPage('buyer');
     </script>
 </body>
