@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toko Online A'Didin - Modern & Realtime</title>
+    
+    <!-- PWA Manifest & Theme Color -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- CONFIGURASI UTAMA & RESET --- */
@@ -495,7 +502,6 @@
                         <div class="summary-line"><span>Subtotal Barang:</span> <span id="summary-subtotal">Rp 0</span></div>
                         <div class="summary-line"><span>Ongkos Kirim:</span> <span id="summary-shipping">Ditentukan Admin</span></div>
                         <hr style="margin: 5px 0; border: none; border-top: 1px solid var(--border-color);">
-                        <!-- Tulisan "Bayar" dihapus dan diganti menjadi "Total:" -->
                         <div class="summary-line total"><span>Total:</span> <span id="summary-total">Rp 0 (+ Ongkir Manual)</span></div>
                     </div>
 
@@ -730,6 +736,15 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     
     <script>
+        // ================= DAFTARKAN SERVICE WORKER UNTUK PWA =================
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('PWA Service Worker terdaftar:', reg.scope))
+                    .catch(err => console.log('PWA Service Worker gagal:', err));
+            });
+        }
+
         // ================= CONFIGURASI FIREBASE ONLINE REALTIME =================
         const firebaseConfig = {
             apiKey: "AIzaSyAtEnnjZ73JhkR0lX37Lk2VTN0ikwerkyI",
@@ -1290,7 +1305,8 @@
                 adminDashboard.classList.remove('hidden');
                 renderAdminProductTable();
             } else {
-                adminDashboard.classList.add('hidden'); loginBox.classList.remove('hidden');
+                adminDashboard.classList.add('hidden'); loginBox.classList.add('hidden'); // Memperbaiki penutupan kotak login
+                loginBox.classList.remove('hidden');
             }
         }
 
