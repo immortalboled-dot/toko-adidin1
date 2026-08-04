@@ -363,7 +363,7 @@
             width: 100%; 
             border-collapse: collapse; 
             font-size: 11px; 
-            min-width: 680px; 
+            min-width: 720px; 
         }
         .admin-table th, .admin-table td { 
             padding: 8px 10px; 
@@ -380,6 +380,30 @@
         .badge-stock { padding: 2px 4px; font-size: 9px; border-radius: 4px; font-weight: bold; white-space: nowrap; }
         .badge-stock.in { background: #dcfce7; color: #16a34a; }
         .badge-stock.out { background: #fee2e2; color: #dc2626; }
+
+        /* LABEL CIRI STATUS PESANAN */
+        .order-status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-bottom: 6px;
+        }
+        .order-status-badge.active {
+            background: #ffedd5;
+            color: #c2410c;
+            border: 1px solid #fdba74;
+        }
+        .order-status-badge.completed {
+            background: #f1f5f9;
+            color: #64748b;
+            border: 1px solid #cbd5e1;
+        }
+        .row-order-completed {
+            opacity: 0.65;
+            background: #fafaf9;
+        }
 
         /* KELOMPOK TOMBOL AKSI ADMIN (VERTIKAL & RESPONSIF) */
         .btn-actions-group { 
@@ -736,7 +760,6 @@
             cart = [];
         }
 
-        // Persistent Session Login Admin
         let currentLoggedInAdmin = localStorage.getItem('adidin_admin_session') ? JSON.parse(localStorage.getItem('adidin_admin_session')) : null;
 
         function saveCartToLocalStorage() {
@@ -821,7 +844,6 @@
             adminUsers = data ? Object.values(data) : [{ username: "admin", password: "123", whatsapp: "628991286742" }];
         });
 
-        // Data Histori selalu aktif sinkronisasinya agar otomatis muncul saat login/refresh
         db.ref('orderHistory').on('value', (snapshot) => {
             const data = snapshot.val();
             const historyList = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })).reverse() : [];
@@ -830,7 +852,7 @@
 
         db.ref('broadcastHistory').on('value', (snapshot) => {
             const data = snapshot.val();
-            const broadcastList = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+            const broadcastList = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })).reverse() : [];
             if(currentLoggedInAdmin) renderAdminBroadcastHistory(broadcastList);
         });
 
@@ -1188,7 +1210,9 @@
                 note: note,
                 itemsSummary: itemText,
                 subtotal: subtotal,
-                shippingFee: 0 
+                shippingFee: 0,
+                orderStatus: 'active', // Status awal pesanan baru adalah aktif
+                statusLabelText: 'Pesanan Aktif'
             };
 
             db.ref('orderHistory').push(orderData).then(() => {
@@ -1326,10 +1350,17 @@
 
             historyList.forEach(order => {
                 const totalTagihan = order.subtotal + (parseInt(order.shippingFee) || 0);
+                const isCompleted = order.orderStatus === 'completed';
+                const statusBadgeClass = isCompleted ? 'completed' : 'active';
+                const statusText = isCompleted ? '● Pesanan Selesai (Tidak Aktif)' : '● Pesanan Aktif';
+
                 const tr = document.createElement('tr');
+                if(isCompleted) tr.className = 'row-order-completed';
+
                 tr.innerHTML = `
                     <td>${order.timestamp}</td>
                     <td>
+                        <span class="order-status-badge ${statusBadgeClass}">${statusText}</span><br>
                         <strong>${order.buyerName}</strong><br>
                         WA: ${order.buyerPhone}<br>
                         Alamat/ID: ${order.buyerAddress}
@@ -1370,19 +1401,28 @@
                 if(!order) return;
                 
                 let msg = "";
+                let newStatus = 'active';
                 const total = order.subtotal + (parseInt(order.shippingFee) || 0);
                 let phoneClean = order.buyerPhone.startsWith('0') ? '62' + order.buyerPhone.slice(1) : order.buyerPhone;
 
                 if (statusType === 'received') {
                     msg = `*INFO TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPesanan Anda telah *pesanan sudah di terima* oleh sistem kami. Terima kasih! 😊`;
+                    newStatus = 'active';
                 } else if (statusType === 'process') {
                     msg = `*INFO TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\n*Mohon tunggu, pesanan sedang di proses* oleh tim kami ya. 🙏✨`;
+                    newStatus = 'active';
                 } else if (statusType === 'delivering') {
                     msg = `*INFO TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\n*Pesanan sedang di antar*. Total tagihan sebesar *Rp ${total.toLocaleString('id-ID')}* (*Mohon siapkan uang tunai* pas/sesuai nominal). Terima kasih! 🛵💵`;
+                    newStatus = 'active';
                 } else if (statusType === 'completed') {
                     msg = `*INFO TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\n*Pesanan selesai, terima kasih* banyak telah berbelanja di toko kami! 🙏✨\n\n⚠️ *Catatan Sistem:* Toko kami berkomitmen memajukan UMKM Lokal secara sehat, mohon maaf *TIDAK MENERIMA / TIDAK BOLEH HUTANG*. Sampai jumpa di pesanan berikutnya!`;
+                    newStatus = 'completed'; // Mengubah ciri pesanan menjadi Selesai (Tidak Aktif)
                 }
-                window.open(`https://api.whatsapp.com/send?phone=${phoneClean}&text=${encodeURIComponent(msg)}`, '_blank');
+
+                // Update status di Firebase secara otomatis
+                db.ref(`orderHistory/${id}`).update({ orderStatus: newStatus }).then(() => {
+                    window.open(`https://api.whatsapp.com/send?phone=${phoneClean}&text=${encodeURIComponent(msg)}`, '_blank');
+                });
             });
         };
 
