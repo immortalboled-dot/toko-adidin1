@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toko Online A'Didin - Modern & Realtime</title>
+    <title>Toko Online & POS Kasir A'Didin</title>
     
     <!-- PWA Manifest & Theme Color -->
     <link rel="manifest" href="manifest.json">
@@ -120,9 +120,7 @@
             padding: 5px 6px;
             transition: 0.3s;
         }
-        .notification-bell:hover {
-            color: var(--warning-color);
-        }
+        .notification-bell:hover { color: var(--warning-color); }
         .bell-badge {
             position: absolute;
             top: 0; right: 0;
@@ -142,10 +140,7 @@
             color: var(--text-dark);
         }
         .bell-empty { text-align: center; color: var(--text-muted); padding: 5px 0;}
-        .bell-item {
-            border-bottom: 1px solid var(--border-color);
-            padding: 6px 0;
-        }
+        .bell-item { border-bottom: 1px solid var(--border-color); padding: 6px 0; }
         .bell-item:last-child { border: none; }
 
         /* --- TOMBOL-TOMBOL --- */
@@ -169,13 +164,8 @@
         .btn-block { width: 100%; display: block; }
 
         /* --- LAYOUT HALAMAN --- */
-        .page-section {
-            display: none;
-            padding: 15px 0;
-        }
-        .page-section.active {
-            display: block;
-        }
+        .page-section { display: none; padding: 15px 0; }
+        .page-section.active { display: block; }
         .section-title {
             margin-bottom: 15px;
             position: relative;
@@ -183,57 +173,37 @@
             font-size: 18px;
         }
         .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 35px;
-            height: 3px;
+            content: ''; position: absolute;
+            bottom: 0; left: 0;
+            width: 35px; height: 3px;
             background: var(--primary-color);
         }
 
         .banner-upgrade {
-            background: #eff6ff; 
-            border: 1px solid #bfdbfe; 
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 12px;
+            background: #eff6ff; border: 1px solid #bfdbfe; 
+            margin-bottom: 15px; padding: 10px;
+            border-radius: 8px; font-size: 12px;
         }
 
         /* --- FITUR PENCARIAN & FILTER --- */
         .search-filter-box {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 15px;
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
+            display: flex; flex-direction: column; gap: 10px;
+            margin-bottom: 15px; background: white;
+            padding: 10px; border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         @media(min-width: 768px) {
-            .search-filter-box {
-                flex-direction: row;
-                gap: 12px;
-                padding: 12px;
-            }
+            .search-filter-box { flex-direction: row; gap: 12px; padding: 12px; }
         }
         .search-input, .filter-select {
-            display: flex;
-            align-items: center;
-            background: #f1f5f9;
-            padding: 8px 10px;
-            border-radius: 6px;
-            flex: 1;
+            display: flex; align-items: center;
+            background: #f1f5f9; padding: 8px 10px;
+            border-radius: 6px; flex: 1;
         }
         .search-input input, .filter-select select {
-            border: none;
-            background: transparent;
-            width: 100%;
-            margin-left: 8px;
-            outline: none;
-            font-size: 13px;
+            border: none; background: transparent;
+            width: 100%; margin-left: 8px;
+            outline: none; font-size: 13px;
         }
 
         /* --- GRID PRODUK PEMBELI --- */
@@ -243,14 +213,10 @@
             gap: 12px;
         }
         .product-card {
-            background: white;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            background: white; border-radius: 8px;
+            border: 1px solid var(--border-color); overflow: hidden;
+            display: flex; flex-direction: column;
+            justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
         .product-card.out-of-stock { opacity: 0.6; }
         .product-img-box {
@@ -259,12 +225,10 @@
         }
         .product-img-box img { width: 100%; height: 100%; object-fit: cover; }
         .badge-out {
-            position: absolute;
-            top: 6px; right: 6px;
-            background: var(--danger-color);
-            color: white; padding: 2px 5px;
-            font-size: 9px; border-radius: 4px;
-            font-weight: bold;
+            position: absolute; top: 6px; right: 6px;
+            background: var(--danger-color); color: white;
+            padding: 2px 5px; font-size: 9px;
+            border-radius: 4px; font-weight: bold;
         }
         .product-info { padding: 10px; flex-grow: 1; }
         .product-cat { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
@@ -272,11 +236,8 @@
         .product-desc { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
         
         .weight-selector-box, .digital-selector-box {
-            background: #f8fafc;
-            border: 1px solid var(--border-color);
-            padding: 6px;
-            border-radius: 6px;
-            margin: 6px 0;
+            background: #f8fafc; border: 1px solid var(--border-color);
+            padding: 6px; border-radius: 6px; margin: 6px 0;
         }
         .weight-selector-box label, .digital-selector-box label { font-size: 10px; font-weight: bold; color: var(--text-dark); display: block; margin-bottom: 2px;}
         .weight-presets { display: flex; gap: 3px; margin-bottom: 3px; }
@@ -336,17 +297,17 @@
         .form-style input[type="color"] { height: 34px; padding: 2px; cursor: pointer; }
         .form-style textarea { height: 65px; resize: vertical; }
 
-        /* --- PANEL AUTH (ADMIN) --- */
+        /* --- PANEL AUTH (ADMIN/KASIR) --- */
         .auth-box {
-            max-width: 360px; margin: 25px auto; background: white;
-            padding: 18px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            max-width: 380px; margin: 25px auto; background: white;
+            padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
             border: 1px solid var(--border-color);
         }
         .auth-box h2 { text-align: center; margin-bottom: 12px; font-size: 18px; }
         .auth-switch { text-align: center; margin-top: 10px; font-size: 11px; color: var(--text-muted); }
         .auth-switch span { color: var(--primary-color); cursor: pointer; font-weight: bold; }
 
-        /* --- DASHBOARD ADMIN LAYOUT --- */
+        /* --- DASHBOARD ADMIN & KASIR LAYOUT --- */
         .admin-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;
@@ -357,77 +318,60 @@
         .card { background: white; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 12px; }
         .card h3 { margin-bottom: 10px; font-size: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
 
-        /* TABEL ADMIN YANG RESPONSIF */
+        /* KASIR POS SPECIFIC STYLE */
+        .pos-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        @media (min-width: 768px) { .pos-grid { grid-template-columns: 1.2fr 1fr; } }
+        .pos-products { max-height: 480px; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; padding: 4px; }
+        .pos-item-card { background: white; border: 1px solid var(--border-color); border-radius: 6px; padding: 8px; text-align: center; cursor: pointer; transition: 0.2s; }
+        .pos-item-card:hover { border-color: var(--primary-color); background: #eff6ff; }
+        .pos-item-card img { width: 100%; height: 60px; object-fit: cover; border-radius: 4px; }
+        .pos-item-card h5 { font-size: 11px; margin: 4px 0 2px 0; }
+        .pos-item-card p { font-size: 10px; color: var(--warning-color); font-weight: bold; }
+
+        /* TABEL ADMIN RESPONSIF */
         .table-responsive { 
-            width: 100%;
-            overflow-x: auto; 
-            -webkit-overflow-scrolling: touch; 
-            margin-bottom: 5px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+            width: 100%; overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; margin-bottom: 5px;
+            border: 1px solid var(--border-color); border-radius: 6px;
         }
         .admin-table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            font-size: 11px; 
-            min-width: 720px; 
+            width: 100%; border-collapse: collapse; 
+            font-size: 11px; min-width: 720px; 
         }
         .admin-table th, .admin-table td { 
-            padding: 8px 10px; 
-            text-align: left; 
+            padding: 8px 10px; text-align: left; 
             border-bottom: 1px solid var(--border-color); 
         }
         .admin-table th { background: #f1f5f9; font-weight: 600; white-space: nowrap; }
         .admin-table td img { width: 30px; height: 30px; object-fit: cover; border-radius: 4px; }
         
-        .admin-table td.detail-cell, .admin-table th.detail-header {
-            min-width: 180px;
-        }
+        .admin-table td.detail-cell, .admin-table th.detail-header { min-width: 180px; }
 
         .badge-stock { padding: 2px 4px; font-size: 9px; border-radius: 4px; font-weight: bold; white-space: nowrap; }
         .badge-stock.in { background: #dcfce7; color: #16a34a; }
         .badge-stock.out { background: #fee2e2; color: #dc2626; }
 
-        /* LABEL CIRI STATUS PESANAN */
         .order-status-badge {
-            display: inline-block;
-            padding: 3px 8px;
-            font-size: 10px;
-            font-weight: bold;
-            border-radius: 4px;
-            margin-bottom: 6px;
+            display: inline-block; padding: 3px 8px;
+            font-size: 10px; font-weight: bold;
+            border-radius: 4px; margin-bottom: 6px;
         }
-        .order-status-badge.active {
-            background: #ffedd5;
-            color: #c2410c;
-            border: 1px solid #fdba74;
-        }
-        .order-status-badge.completed {
-            background: #f1f5f9;
-            color: #64748b;
-            border: 1px solid #cbd5e1;
-        }
-        .row-order-completed {
-            opacity: 0.65;
-            background: #fafaf9;
+        .order-status-badge.active { background: #ffedd5; color: #c2410c; border: 1px solid #fdba74; }
+        .order-status-badge.completed { background: #f1f5f9; color: #64748b; border: 1px solid #cbd5e1; }
+        .row-order-completed { opacity: 0.65; background: #fafaf9; }
+
+        .btn-actions-group { display: flex; flex-direction: column; gap: 5px; min-width: 230px; }
+        .btn-actions-group button { 
+            padding: 5px 8px; font-size: 11px; text-align: left; 
+            display: flex; align-items: center; gap: 6px; 
+            width: 100%; white-space: normal;
         }
 
-        /* KELOMPOK TOMBOL AKSI ADMIN (VERTIKAL & RESPONSIF) */
-        .btn-actions-group { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 5px; 
-            min-width: 230px;
-        }
-        .btn-actions-group button { 
-            padding: 5px 8px; 
-            font-size: 11px; 
-            text-align: left; 
-            display: flex; 
-            align-items: center; 
-            gap: 6px; 
-            width: 100%;
-            white-space: normal;
+        /* --- PRINT KASIR NOTA STRUCT --- */
+        @media print {
+            body * { visibility: hidden; }
+            #printable-receipt, #printable-receipt * { visibility: visible; }
+            #printable-receipt { position: absolute; left: 0; top: 0; width: 100%; font-family: monospace; }
         }
 
         /* --- FOOTER --- */
@@ -443,13 +387,13 @@
         <div class="navbar container">
             <div class="logo">
                 <h1>A'Didin</h1>
-                <p>Mengembangkan UMKM Lokal</p>
+                <p>Toko & Sistem POS Kasir UMKM</p>
                 <div id="live-datetime" class="datetime-display">Memuat waktu...</div>
             </div>
             <nav>
                 <button id="btn-home" class="nav-link active"><i class="fas fa-store"></i> Toko</button>
                 <button id="btn-cart-view" class="nav-link"><i class="fas fa-shopping-cart"></i> Keranjang <span id="cart-count">0</span></button>
-                <button id="btn-admin-nav" class="nav-link"><i class="fas fa-user-shield"></i> Admin</button>
+                <button id="btn-admin-nav" class="nav-link"><i class="fas fa-user-shield"></i> Portal Admin / Kasir</button>
                 
                 <div class="notification-bell" id="bell-container">
                     <i class="fas fa-bell"></i>
@@ -465,6 +409,7 @@
 
     <main class="container">
         
+        <!-- ================= PEMBELI PAGE ================= -->
         <section id="buyer-dashboard" class="page-section active">
             <div id="shop-upgrade-banner" class="card hidden banner-upgrade">
                 <h4><i class="fas fa-bullhorn"></i> Pengumuman Toko:</h4>
@@ -488,8 +433,9 @@
             <div id="product-list" class="product-grid"></div>
         </section>
 
+        <!-- ================= KERANJANG BELANJA ================= -->
         <section id="cart-dashboard" class="page-section">
-            <h2 class="section-title">Keranjang Belanja</h2>
+            <h2 class="section-title">Keranjang Belanja Online</h2>
             <div class="cart-container">
                 <div class="cart-items-wrapper">
                     <div id="cart-items-list"></div>
@@ -539,11 +485,19 @@
             </div>
         </section>
 
+        <!-- ================= AUTH & SYSTEM ADMIN / KASIR ================= -->
         <section id="admin-section" class="page-section">
             
             <div id="admin-login-box" class="auth-box">
-                <h2>Login Admin</h2>
+                <h2>Login Sistem Toko</h2>
                 <form id="form-login" class="form-style">
+                    <div class="form-group">
+                        <label for="login-role">Masuk Sebagai</label>
+                        <select id="login-role">
+                            <option value="kasir">Kasir (Toko Fisik)</option>
+                            <option value="admin">Admin Utama (Penuh)</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="login-username">Username</label>
                         <input type="text" id="login-username" required>
@@ -552,14 +506,21 @@
                         <label for="login-password">Password</label>
                         <input type="password" id="login-password" required>
                     </div>
-                    <button type="submit" class="btn-block btn-primary">Masuk</button>
+                    <button type="submit" class="btn-block btn-primary">Masuk Portal</button>
                 </form>
-                <p class="auth-switch">Belum punya akun? <span id="switch-to-register">Daftar Admin Baru</span></p>
+                <p class="auth-switch">Belum punya akun pengelola? <span id="switch-to-register">Daftar Akun Baru</span></p>
             </div>
 
             <div id="admin-register-box" class="auth-box hidden">
-                <h2>Daftar Admin Baru</h2>
+                <h2>Daftar Akun Pengelola</h2>
                 <form id="form-register" class="form-style">
+                    <div class="form-group">
+                        <label for="reg-role">Daftar Sebagai Tipe Akun</label>
+                        <select id="reg-role">
+                            <option value="kasir">Kasir Toko</option>
+                            <option value="admin">Admin Utama</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="reg-username">Username Baru</label>
                         <input type="text" id="reg-username" required>
@@ -569,28 +530,77 @@
                         <input type="password" id="reg-password" required>
                     </div>
                     <div class="form-group">
-                        <label for="reg-whatsapp">Nomor WhatsApp Admin</label>
+                        <label for="reg-whatsapp">Nomor WhatsApp Otorisasi</label>
                         <input type="tel" id="reg-whatsapp" placeholder="Contoh: 62899..." required>
                     </div>
                     <div class="form-group">
-                        <label for="reg-secret">Sandi Khusus Registrasi</label>
-                        <input type="password" id="reg-secret" placeholder="Masukkan sandi otorisasi" required>
+                        <label for="reg-secret">Sandi Otorisasi Pendaftaran</label>
+                        <input type="password" id="reg-secret" placeholder="Masukkan kode otorisasi" required>
                     </div>
-                    <button type="submit" class="btn-block btn-success">Daftar Akun</button>
+                    <button type="submit" class="btn-block btn-success">Daftarkan Sekarang</button>
                 </form>
-                <p class="auth-switch">Sudah punya akun? <span id="switch-to-login">Login Kembali</span></p>
+                <p class="auth-switch">Sudah punya akun? <span id="switch-to-login">Kembali ke Login</span></p>
             </div>
 
+            <!-- DASHBOARD PENGELOLA (ADMIN / KASIR) -->
             <div id="admin-dashboard" class="hidden">
                 <div class="admin-header">
-                    <h2>Dashboard Admin A'Didin</h2>
+                    <div>
+                        <h2>Portal Pengelola A'Didin</h2>
+                        <span id="session-role-badge" style="background:#0284c7; color:white; font-size:10px; font-weight:bold; padding:2px 8px; border-radius:10px;">ROLE: KASIR</span>
+                    </div>
                     <button id="btn-logout" class="btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+
+                <!-- INTEGRASI MODUL KASIR POS -->
+                <div class="card" id="pos-module-card">
+                    <h3><i class="fas fa-cash-register"></i> Kasir POS (Penjualan Toko Fisik)</h3>
+                    <div class="pos-grid">
+                        <div>
+                            <div class="search-input" style="margin-bottom:8px;">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="pos-search" placeholder="Cari nama barang cepat..." oninput="renderPosProducts()">
+                            </div>
+                            <div class="pos-products" id="pos-product-list"></div>
+                        </div>
+                        <div style="background:#f8fafc; padding:10px; border-radius:8px; border:1px solid var(--border-color);">
+                            <h4>Struk Belanja Kasir</h4>
+                            <div id="pos-cart-items" style="max-height:180px; overflow-y:auto; margin:8px 0; border-bottom:1px dashed #cbd5e1; padding-bottom:5px;">
+                                <p style="font-size:11px; text-align:center; color:var(--text-muted);">Belum ada barang dipilih</p>
+                            </div>
+                            <div style="font-size:12px; font-weight:bold; display:flex; justify-content:space-between; margin-bottom:5px;">
+                                <span>Total Belanja:</span> <span id="pos-total-pay" style="color:var(--success-color); font-size:14px;">Rp 0</span>
+                            </div>
+                            <div class="form-style">
+                                <div class="form-group">
+                                    <label>Uang Tunai Bayar (Rp):</label>
+                                    <input type="number" id="pos-cash-input" placeholder="0" oninput="calculatePosChange()">
+                                </div>
+                                <div style="font-size:12px; font-weight:bold; display:flex; justify-content:space-between; margin-bottom:8px;">
+                                    <span>Kembalian:</span> <span id="pos-change-pay" style="color:var(--warning-color);">Rp 0</span>
+                                </div>
+                                <button type="button" class="btn-block btn-success" onclick="processPosTransaction()"><i class="fas fa-print"></i> Selesaikan & Cetak Struk</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="admin-grid">
                     <div class="admin-sidebar">
                         
-                        <div class="card">
+                        <div class="card admin-only-feature">
+                            <h3><i class="fas fa-users-cog"></i> Pengelolaan Akun Pengelola</h3>
+                            <div class="table-responsive">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr><th>Username</th><th>Peran</th><th>Aksi</th></tr>
+                                    </thead>
+                                    <tbody id="admin-users-table"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card admin-only-feature">
                             <h3><i class="fas fa-cogs"></i> Pengaturan Tampilan Toko</h3>
                             <form id="theme-config-form" class="form-style">
                                 <div class="form-group">
@@ -605,7 +615,7 @@
                             </form>
                         </div>
 
-                        <div class="card">
+                        <div class="card admin-only-feature">
                             <h3 id="form-product-title"><i class="fas fa-plus-circle"></i> Tambah Barang Baru</h3>
                             <form id="product-form" class="form-style">
                                 <input type="hidden" id="product-id">
@@ -651,17 +661,17 @@
                     <div class="admin-main">
                         
                         <div class="card">
-                            <h3><i class="fas fa-history"></i> Histori Masuk Pesanan Pembeli</h3>
+                            <h3><i class="fas fa-history"></i> Histori Pesanan Masuk (Online & Kasir POS)</h3>
                             <div class="table-responsive">
                                 <table class="admin-table">
                                     <thead>
                                         <tr>
                                             <th>Waktu/Tanggal</th>
-                                            <th>Data Pembeli</th>
+                                            <th>Data Pembeli / Kasir</th>
                                             <th class="detail-header">Detail Belanja</th>
                                             <th>Ongkir Manual (Rp)</th>
                                             <th>Total</th>
-                                            <th>Aksi & Status WhatsApp</th>
+                                            <th>Aksi & Status</th>
                                         </tr>
                                     </thead>
                                     <tbody id="admin-history-table">
@@ -694,7 +704,7 @@
                             </div>
                         </div>
 
-                        <div class="card">
+                        <div class="card admin-only-feature">
                             <h3><i class="fas fa-bullhorn"></i> Broadcast Upgrade Toko</h3>
                             <form id="wa-broadcast-form" class="form-style">
                                 <div class="form-group">
@@ -726,9 +736,12 @@
         </section>
     </main>
 
+    <!-- KASIR MODAL TERSEMBUNYI UNTUK FORMAT CETAK STRUK -->
+    <div id="printable-receipt" class="hidden"></div>
+
     <footer>
         <div class="container text-center">
-            <p>&copy; 2026 Toko Online A'Didin. Didukung oleh UMKM Lokal.</p>
+            <p>&copy; 2026 Toko Online & POS Kasir A'Didin. Didukung oleh UMKM Lokal.</p>
         </div>
     </footer>
 
@@ -766,15 +779,14 @@
 
         let products = [];
         let adminUsers = [];
+        let posCart = [];
         
         let rawCart = localStorage.getItem('adidin_cart');
         let cart = [];
         try {
             cart = rawCart ? JSON.parse(rawCart) : [];
             if (!Array.isArray(cart)) cart = [];
-        } catch(e) {
-            cart = [];
-        }
+        } catch(e) { cart = []; }
 
         let currentLoggedInAdmin = localStorage.getItem('adidin_admin_session') ? JSON.parse(localStorage.getItem('adidin_admin_session')) : null;
 
@@ -852,12 +864,16 @@
             const data = snapshot.val();
             products = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
             renderBuyerProducts();
-            if(currentLoggedInAdmin) renderAdminProductTable();
+            if(currentLoggedInAdmin) {
+                renderAdminProductTable();
+                renderPosProducts();
+            }
         });
 
         db.ref('adminUsers').on('value', (snapshot) => {
             const data = snapshot.val();
-            adminUsers = data ? Object.values(data) : [{ username: "admin", password: "123", whatsapp: "628991286742" }];
+            adminUsers = data ? Object.values(data) : [{ username: "admin", password: "123", whatsapp: "628991286742", role: "admin" }];
+            if(currentLoggedInAdmin) renderAdminUsersTable();
         });
 
         db.ref('orderHistory').on('value', (snapshot) => {
@@ -942,10 +958,7 @@
                 return matchSearch && matchCat;
             });
 
-            // URUTKAN: Produk yang tersedia (available = true) di atas, produk kosong di bawah
-            filtered.sort((a, b) => {
-                return (b.available === true) - (a.available === true);
-            });
+            filtered.sort((a, b) => (b.available === true) - (a.available === true));
 
             if(filtered.length === 0) {
                 listContainer.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted); padding: 30px 0;">Barang tidak ditemukan.</p>`;
@@ -1189,7 +1202,7 @@
             });
         }
 
-        // CHECKOUT LOGIC 
+        // CHECKOUT LOGIC ONLINE
         document.getElementById('checkout-form').addEventListener('submit', function(e) {
             e.preventDefault();
             if(cart.length === 0) {
@@ -1216,7 +1229,7 @@
                 else if(item.unitChosen === 'renteng') satuanLabel = 'Renteng';
                 else if(item.unitChosen === 'digital') satuanLabel = 'Transaksi';
                 
-                itemText += `${index + 1}. ${item.product.name} [Harga: Rp ${item.product.price.toLocaleString('id-ID')} x ${item.qty} ${satuanLabel}] -> Rp ${totalCost.toLocaleString('id-ID')}\n`;
+                itemText += `${index + 1}. ${item.product.name} [Rp ${item.product.price.toLocaleString('id-ID')} x ${item.qty} ${satuanLabel}] -> Rp ${totalCost.toLocaleString('id-ID')}\n`;
             });
 
             const now = new Date();
@@ -1233,7 +1246,7 @@
                 subtotal: subtotal,
                 shippingFee: 0,
                 orderStatus: 'active',
-                statusLabelText: 'Pesanan Aktif'
+                source: 'Online Shop'
             };
 
             db.ref('orderHistory').push(orderData).then(() => {
@@ -1265,18 +1278,19 @@
 
         document.getElementById('form-register').addEventListener('submit', function(e) {
             e.preventDefault();
+            const role = document.getElementById('reg-role').value;
             const user = document.getElementById('reg-username').value.trim();
             const pass = document.getElementById('reg-password').value;
             const waNum = document.getElementById('reg-whatsapp').value.trim();
             const secret = document.getElementById('reg-secret').value;
 
             if(secret !== DEFAULT_SECRET_REGISTRATION) {
-                alert("Sandi khusus registrasi SALAH!");
+                alert("Sandi otorisasi pendaftaran SALAH!");
                 return;
             }
-            const newAdmin = { username: user, password: pass, whatsapp: waNum };
+            const newAdmin = { username: user, password: pass, whatsapp: waNum, role: role };
             db.ref('adminUsers/' + user).set(newAdmin).then(() => {
-                alert("Admin terdaftar online! Silakan Login.");
+                alert(`Akun ${role.toUpperCase()} terdaftar! Silakan Login.`);
                 registerBox.classList.add('hidden'); loginBox.classList.remove('hidden');
                 this.reset();
             });
@@ -1284,14 +1298,19 @@
 
         document.getElementById('form-login').addEventListener('submit', function(e) {
             e.preventDefault();
+            const roleChoice = document.getElementById('login-role').value;
             const user = document.getElementById('login-username').value.trim();
             const pass = document.getElementById('login-password').value;
 
             const found = adminUsers.find(a => a.username === user && a.password === pass);
             if(found) {
+                if(found.role !== roleChoice) {
+                    alert(`Akun ini terdaftar sebagai '${found.role.toUpperCase()}', bukan '${roleChoice.toUpperCase()}'. Silakan pilih opsi role yang sesuai.`);
+                    return;
+                }
                 currentLoggedInAdmin = found;
                 localStorage.setItem('adidin_admin_session', JSON.stringify(found));
-                alert("Selamat Datang Admin!");
+                alert(`Selamat Datang ${found.role.toUpperCase()} ${found.username}!`);
                 checkAdminSession();
             } else {
                 alert("Username atau Password salah!");
@@ -1308,14 +1327,205 @@
             if(currentLoggedInAdmin) {
                 loginBox.classList.add('hidden'); registerBox.classList.add('hidden');
                 adminDashboard.classList.remove('hidden');
+                
+                const roleBadge = document.getElementById('session-role-badge');
+                if(roleBadge) roleBadge.innerText = `ROLE: ${currentLoggedInAdmin.role.toUpperCase()}`;
+
+                // ATUR TAMPILAN UNTUK KASIR VS ADMIN
+                const adminOnlyEls = document.querySelectorAll('.admin-only-feature');
+                if(currentLoggedInAdmin.role === 'kasir') {
+                    adminOnlyEls.forEach(el => el.classList.add('hidden'));
+                } else {
+                    adminOnlyEls.forEach(el => el.classList.remove('hidden'));
+                }
+
                 renderAdminProductTable();
+                renderPosProducts();
+                renderAdminUsersTable();
             } else {
                 adminDashboard.classList.add('hidden'); loginBox.classList.remove('hidden');
             }
         }
 
 
-        // ================= LOGIKA DASHBOARD ADMIN & SETTINGAN =================
+        // ================= KASIR POS LOGIC =================
+        function renderPosProducts() {
+            const container = document.getElementById('pos-product-list');
+            const search = document.getElementById('pos-search').value.toLowerCase();
+            if(!container) return;
+            container.innerHTML = '';
+
+            const availableProds = products.filter(p => p.available && p.name.toLowerCase().includes(search));
+            if(availableProds.length === 0) {
+                container.innerHTML = `<p style="grid-column:1/-1; text-align:center; font-size:11px; color:var(--text-muted);">Tidak ada barang.</p>`;
+                return;
+            }
+
+            availableProds.forEach(p => {
+                const item = document.createElement('div');
+                item.className = 'pos-item-card';
+                item.onclick = () => addToPosCart(p);
+                item.innerHTML = `
+                    <img src="${p.img}" alt="${p.name}">
+                    <h5>${p.name}</h5>
+                    <p>Rp ${p.price.toLocaleString('id-ID')}</p>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function addToPosCart(product) {
+            const existing = posCart.find(i => i.product.id === product.id);
+            if(existing) {
+                existing.qty += 1;
+            } else {
+                posCart.push({ product: product, qty: 1 });
+            }
+            renderPosCart();
+        }
+
+        function renderPosCart() {
+            const container = document.getElementById('pos-cart-items');
+            if(!container) return;
+            container.innerHTML = '';
+
+            if(posCart.length === 0) {
+                container.innerHTML = `<p style="font-size:11px; text-align:center; color:var(--text-muted);">Belum ada barang dipilih</p>`;
+                document.getElementById('pos-total-pay').innerText = "Rp 0";
+                calculatePosChange();
+                return;
+            }
+
+            let total = 0;
+            posCart.forEach((item, idx) => {
+                const cost = item.product.price * item.qty;
+                total += cost;
+                const row = document.createElement('div');
+                row.style.cssText = "display:flex; justify-content:space-between; align-items:center; font-size:11px; margin-bottom:4px;";
+                row.innerHTML = `
+                    <div style="flex-grow:1;">
+                        <strong>${item.product.name}</strong><br>
+                        Rp ${item.product.price.toLocaleString('id-ID')} x ${item.qty}
+                    </div>
+                    <div>
+                        <button style="padding:1px 4px; font-size:9px;" onclick="changePosQty(${idx}, -1)">-</button>
+                        <button style="padding:1px 4px; font-size:9px;" onclick="changePosQty(${idx}, 1)">+</button>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            document.getElementById('pos-total-pay').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+            calculatePosChange();
+        }
+
+        window.changePosQty = function(idx, delta) {
+            posCart[idx].qty += delta;
+            if(posCart[idx].qty <= 0) posCart.splice(idx, 1);
+            renderPosCart();
+        };
+
+        window.calculatePosChange = function() {
+            let total = 0;
+            posCart.forEach(i => total += (i.product.price * i.qty));
+            const cash = parseInt(document.getElementById('pos-cash-input').value) || 0;
+            const change = cash - total;
+            const changeEl = document.getElementById('pos-change-pay');
+            if(changeEl) {
+                changeEl.innerText = `Rp ${(change >= 0 ? change : 0).toLocaleString('id-ID')}`;
+            }
+        };
+
+        window.processPosTransaction = function() {
+            if(posCart.length === 0) {
+                alert("Kasir POS belum memilih item!");
+                return;
+            }
+            let total = 0;
+            let summary = "";
+            posCart.forEach((i, idx) => {
+                const sub = i.product.price * i.qty;
+                total += sub;
+                summary += `${idx + 1}. ${i.product.name} [Rp ${i.product.price.toLocaleString('id-ID')} x ${i.qty}] -> Rp ${sub.toLocaleString('id-ID')}\n`;
+            });
+
+            const cash = parseInt(document.getElementById('pos-cash-input').value) || 0;
+            if(cash < total) {
+                alert("Uang tunai kurang dari total belanja!");
+                return;
+            }
+
+            const now = new Date();
+            const timestampStr = `${now.toLocaleDateString('id-ID')} ${now.toLocaleTimeString('id-ID')}`;
+            const change = cash - total;
+
+            const orderData = {
+                timestamp: timestampStr,
+                buyerName: `Pelanggan Toko (Kasir: ${currentLoggedInAdmin.username})`,
+                buyerPhone: "-",
+                buyerAddress: "Transaksi Langsung Toko Physical",
+                timeOption: "Selesai di Tempat",
+                note: `Dibayar: Rp ${cash.toLocaleString('id-ID')} | Kembali: Rp ${change.toLocaleString('id-ID')}`,
+                itemsSummary: summary,
+                subtotal: total,
+                shippingFee: 0,
+                orderStatus: 'completed',
+                source: 'POS Kasir'
+            };
+
+            db.ref('orderHistory').push(orderData).then(() => {
+                // FORMAT CETAK STRUK Thermal
+                const printDiv = document.getElementById('printable-receipt');
+                printDiv.innerHTML = `
+                    <div style="width:280px; font-size:12px; font-family:monospace; padding:10px;">
+                        <center>
+                            <h3>TOKO A'DIDIN</h3>
+                            <p>Transaksi Kasir POS</p>
+                            <p>${timestampStr}</p>
+                            <p>Kasir: ${currentLoggedInAdmin.username}</p>
+                        </center>
+                        <hr style="border-top:1px dashed #000;">
+                        <pre style="font-family:monospace; font-size:11px;">${summary}</pre>
+                        <hr style="border-top:1px dashed #000;">
+                        <p>Total     : Rp ${total.toLocaleString('id-ID')}</p>
+                        <p>Bayar     : Rp ${cash.toLocaleString('id-ID')}</p>
+                        <p>Kembali   : Rp ${change.toLocaleString('id-ID')}</p>
+                        <hr style="border-top:1px dashed #000;">
+                        <center><p>Terima Kasih Atas Kunjungan Anda!</p></center>
+                    </div>
+                `;
+                window.print();
+
+                posCart = [];
+                document.getElementById('pos-cash-input').value = "";
+                renderPosCart();
+                alert("Transaksi Kasir Sukses Disimpan!");
+            });
+        };
+
+
+        // ================= LOGIKA DASHBOARD ADMIN & DAFTAR KASIR =================
+        function renderAdminUsersTable() {
+            const tbody = document.getElementById('admin-users-table');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            adminUsers.forEach(u => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${u.username}</strong></td>
+                    <td><span style="background:#e0f2fe; color:#0369a1; padding:2px 5px; border-radius:4px; font-weight:bold;">${(u.role || 'admin').toUpperCase()}</span></td>
+                    <td><button class="btn-danger" style="padding:2px 6px; font-size:10px;" onclick="deleteAdminUser('${u.username}')">Hapus</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        window.deleteAdminUser = function(username) {
+            if(confirm(`Hapus pengelola ${username}?`)) {
+                db.ref('adminUsers/' + username).remove();
+            }
+        };
+
         document.getElementById('theme-config-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const bgVal = document.getElementById('theme-bg-color').value;
@@ -1373,13 +1583,13 @@
                 const totalTagihan = order.subtotal + (parseInt(order.shippingFee) || 0);
                 const isCompleted = order.orderStatus === 'completed';
                 const statusBadgeClass = isCompleted ? 'completed' : 'active';
-                const statusText = isCompleted ? '● Pesanan Selesai (Tidak Aktif)' : '● Pesanan Aktif';
+                const statusText = isCompleted ? '● Pesanan Selesai' : '● Pesanan Aktif';
 
                 const tr = document.createElement('tr');
                 if(isCompleted) tr.className = 'row-order-completed';
 
                 tr.innerHTML = `
-                    <td>${order.timestamp}</td>
+                    <td>${order.timestamp}<br><span style="font-size:9px; color:var(--primary-color);">[${order.source || 'Online'}]</span></td>
                     <td>
                         <span class="order-status-badge ${statusBadgeClass}">${statusText}</span><br>
                         <strong>${order.buyerName}</strong><br>
@@ -1393,10 +1603,10 @@
                     <td><strong>Rp ${totalTagihan.toLocaleString('id-ID')}</strong></td>
                     <td>
                         <div class="btn-actions-group">
-                            <button class="btn-primary" style="background:#0284c7" onclick="sendStatusWa('${order.id}', 'received')"><i class="fab fa-whatsapp"></i> Pesanan sudah di terima</button>
-                            <button class="btn-primary" style="background:#d97706" onclick="sendStatusWa('${order.id}', 'process')"><i class="fab fa-whatsapp"></i> Mohon tunggu pesanan sedang di proses</button>
-                            <button class="btn-whatsapp" onclick="sendStatusWa('${order.id}', 'delivering')"><i class="fab fa-whatsapp"></i> Pesanan sedang di antar & siapkan uang tunai</button>
-                            <button class="btn-success" onclick="sendStatusWa('${order.id}', 'completed')"><i class="fab fa-whatsapp"></i> Pesanan selesai terimakasih</button>
+                            <button class="btn-primary" style="background:#0284c7" onclick="sendStatusWa('${order.id}', 'received')"><i class="fab fa-whatsapp"></i> Pesanan diterima</button>
+                            <button class="btn-primary" style="background:#d97706" onclick="sendStatusWa('${order.id}', 'process')"><i class="fab fa-whatsapp"></i> Sedang diproses</button>
+                            <button class="btn-whatsapp" onclick="sendStatusWa('${order.id}', 'delivering')"><i class="fab fa-whatsapp"></i> Sedang diantar</button>
+                            <button class="btn-success" onclick="sendStatusWa('${order.id}', 'completed')"><i class="fab fa-whatsapp"></i> Selesai & Terima Kasih</button>
                             <button class="btn-danger" onclick="deleteOrderHistory('${order.id}')"><i class="fas fa-trash-alt"></i> Hapus Histori</button>
                         </div>
                     </td>
@@ -1427,7 +1637,7 @@
                 let phoneClean = order.buyerPhone.startsWith('0') ? '62' + order.buyerPhone.slice(1) : order.buyerPhone;
 
                 if (statusType === 'received') {
-                    msg = `*INFO TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPesanan Anda telah *pesanan sudah di terima* oleh sistem kami. Terima kasih! 😊`;
+                    msg = `*INFO TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\nPesanan Anda telah *diterima* oleh sistem kami. Terima kasih! 😊`;
                     newStatus = 'active';
                 } else if (statusType === 'process') {
                     msg = `*INFO TOKO A'DIDIN*\n\nHalo Kak *${order.buyerName}*,\n*Mohon tunggu, pesanan sedang di proses* oleh tim kami ya. 🙏✨`;
@@ -1441,7 +1651,11 @@
                 }
 
                 db.ref(`orderHistory/${id}`).update({ orderStatus: newStatus }).then(() => {
-                    window.open(`https://api.whatsapp.com/send?phone=${phoneClean}&text=${encodeURIComponent(msg)}`, '_blank');
+                    if(phoneClean && phoneClean !== "-") {
+                        window.open(`https://api.whatsapp.com/send?phone=${phoneClean}&text=${encodeURIComponent(msg)}`, '_blank');
+                    } else {
+                        alert("Status diperbarui.");
+                    }
                 });
             });
         };
@@ -1526,6 +1740,7 @@
                 else if(p.unitType === 'digital') showUnit = 'Digital (Kustom)';
 
                 const displayPriceText = p.unitType === 'digital' ? 'Diisi Pembeli' : `Rp ${p.price.toLocaleString('id-ID')}`;
+                const isKasir = currentLoggedInAdmin && currentLoggedInAdmin.role === 'kasir';
 
                 tr.innerHTML = `
                     <td><img src="${p.img}" alt="${p.name}"></td>
@@ -1535,11 +1750,11 @@
                     <td><span class="badge-stock ${p.available ? 'in' : 'out'}">${p.available ? 'Tersedia' : 'Kosong'}</span></td>
                     <td>
                         <div class="btn-actions-group" style="min-width: 130px;">
-                            <button class="btn-secondary" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i> Edit</button>
+                            ${!isKasir ? `<button class="btn-secondary" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i> Edit</button>` : ''}
                             <button class="${p.available ? 'btn-danger' : 'btn-success'}" onclick="toggleStock('${p.id}', ${p.available})">
                                 ${p.available ? 'Set Kosong' : 'Set Ada'}
                             </button>
-                            <button class="btn-danger" style="background:#451a03" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash-alt"></i> Hapus</button>
+                            ${!isKasir ? `<button class="btn-danger" style="background:#451a03" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash-alt"></i> Hapus</button>` : ''}
                         </div>
                     </td>
                 `;
