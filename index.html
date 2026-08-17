@@ -367,7 +367,7 @@
             width: 100%; white-space: normal;
         }
 
-        /* --- PERBAIKAN CSS CETAK STRUK THERMAL --- */
+        /* --- CETAK STRUK THERMAL --- */
         #printable-receipt {
             display: none;
         }
@@ -746,6 +746,7 @@
                                         <tr>
                                             <th>Waktu Kirim</th>
                                             <th>Isi Pengumuman</th>
+                                            <th style="width: 80px;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="admin-broadcast-history-table"></tbody>
@@ -1460,7 +1461,6 @@
             }
         };
 
-        // PERBAIKAN FUNGSI PROSES & CETAK STRUK
         window.processPosTransaction = function() {
             if(posCart.length === 0) {
                 alert("Kasir POS belum memilih item!");
@@ -1501,7 +1501,6 @@
             db.ref('orderHistory').push(orderData).then(() => {
                 const printDiv = document.getElementById('printable-receipt');
                 
-                // Format HTML Cetak Thermal yang Rapi
                 printDiv.innerHTML = `
                     <div style="width:100%; text-align:center; font-weight:bold; font-size:16px;">TOKO A'DIDIN</div>
                     <div style="width:100%; text-align:center; font-size:11px;">Jl. Raya UMKM No. 1 - Indonesia</div>
@@ -1526,7 +1525,6 @@
                     <br><br>
                 `;
 
-                // Tampilkan sebentar kontainer cetak dan panggil cetak printer
                 printDiv.style.display = 'block';
                 
                 setTimeout(() => {
@@ -1592,20 +1590,42 @@
             });
         });
 
+        // RENDER ARSIP HISTORI PENGUMUMAN DENGAN TOMBOL HAPUS
         function renderAdminBroadcastHistory(list) {
             const tbody = document.getElementById('admin-broadcast-history-table');
             if(!tbody) return;
             tbody.innerHTML = '';
+            
             if(list.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="2" style="text-align:center;">Belum ada arsip broadcast</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:var(--text-muted); padding:10px;">Belum ada arsip broadcast</td></tr>';
                 return;
             }
+            
             list.forEach(b => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${b.time}</td><td>${b.text}</td>`;
+                tr.innerHTML = `
+                    <td>${b.time}</td>
+                    <td>${b.text}</td>
+                    <td>
+                        <button class="btn-danger" style="padding: 3px 8px; font-size: 10px;" onclick="deleteBroadcastHistory('${b.id}')">
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
+                    </td>
+                `;
                 tbody.appendChild(tr);
             });
         }
+
+        // FUNGSI MENGHAPUS NOTIFIKASI DARI DATABASE FIREBASE
+        window.deleteBroadcastHistory = function(id) {
+            if(confirm("Apakah Anda yakin ingin menghapus pengumuman ini dari riwayat?")) {
+                db.ref('broadcastHistory/' + id).remove().then(() => {
+                    alert("Riwayat pengumuman berhasil dihapus!");
+                }).catch((err) => {
+                    alert("Gagal menghapus data: " + err.message);
+                });
+            }
+        };
 
         function renderAdminHistoryTable(historyList) {
             const tbody = document.getElementById('admin-history-table');
