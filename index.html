@@ -805,6 +805,7 @@
         let products = [];
         let adminUsers = [];
         let posCart = [];
+        let globalHistoryList = []; // Simpan referensi histori transaksi global
         
         let rawCart = localStorage.getItem('adidin_cart');
         let cart = [];
@@ -903,8 +904,8 @@
 
         db.ref('orderHistory').on('value', (snapshot) => {
             const data = snapshot.val();
-            const historyList = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })).reverse() : [];
-            renderAdminHistoryTable(historyList);
+            globalHistoryList = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })).reverse() : [];
+            renderAdminHistoryTable(globalHistoryList);
         });
 
         db.ref('broadcastHistory').on('value', (snapshot) => {
@@ -1367,6 +1368,7 @@
                 renderAdminProductTable();
                 renderPosProducts();
                 renderAdminUsersTable();
+                renderAdminHistoryTable(globalHistoryList);
             } else {
                 adminDashboard.classList.add('hidden'); loginBox.classList.remove('hidden');
             }
@@ -1637,6 +1639,9 @@
                 return;
             }
 
+            // Pengecekan status login admin utama
+            const isAdmin = currentLoggedInAdmin && currentLoggedInAdmin.role === 'admin';
+
             historyList.forEach(order => {
                 const totalTagihan = order.subtotal + (parseInt(order.shippingFee) || 0);
                 const isCompleted = order.orderStatus === 'completed';
@@ -1665,7 +1670,7 @@
                             <button class="btn-primary" style="background:#d97706" onclick="sendStatusWa('${order.id}', 'process')"><i class="fab fa-whatsapp"></i> Sedang diproses</button>
                             <button class="btn-whatsapp" onclick="sendStatusWa('${order.id}', 'delivering')"><i class="fab fa-whatsapp"></i> Sedang diantar</button>
                             <button class="btn-success" onclick="sendStatusWa('${order.id}', 'completed')"><i class="fab fa-whatsapp"></i> Selesai & Terima Kasih</button>
-                            <button class="btn-danger" onclick="deleteOrderHistory('${order.id}')"><i class="fas fa-trash-alt"></i> Hapus Histori</button>
+                            ${isAdmin ? `<button class="btn-danger" onclick="deleteOrderHistory('${order.id}')"><i class="fas fa-trash-alt"></i> Hapus Histori</button>` : ''}
                         </div>
                     </td>
                 `;
@@ -1679,6 +1684,12 @@
         };
 
         window.deleteOrderHistory = function(id) {
+            // Proteksi Sisi Client (Hanya Admin yang bisa eksekusi)
+            if (!currentLoggedInAdmin || currentLoggedInAdmin.role !== 'admin') {
+                alert("Akses ditolak! Hanya Admin Utama yang berhak menghapus histori pesanan.");
+                return;
+            }
+
             if(confirm("Hapus catatan transaksi ini dari histori?")) {
                 db.ref(`orderHistory/${id}`).remove().then(() => alert("Histori terhapus."));
             }
